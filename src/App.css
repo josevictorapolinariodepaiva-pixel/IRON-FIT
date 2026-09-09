@@ -1,0 +1,25 @@
+html,
+body,
+#root {
+  width: 100% !important;
+  max-width: none !important;
+
+  min-width: 100%;
+  min-height: 100vh;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#root {
+  display: block;
+}
+
+#root > * {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding-left: 0;
+  padding-right: 0;
+}
