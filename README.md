@@ -1,32 +1,72 @@
-# React + TypeScript + Vite
+Sistema web para gerenciamento de academia, desenvolvido com React e TypeScript.
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## 🚀 Tecnologias
 
-Currently, two official plugins are available:
+- React
+- TypeScript
+- Vite
+- React Router
+- CSS
+- Node.js
+- PostgreSQL
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Funcionalidades
 
-## React Compiler
+### 👤 Área do Aluno
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Dashboard
+- Treinos
+- Exercícios
+- Dieta
+- Progresso
+- Perfil
+- Vídeos de treinamento
 
-## Expanding the Oxlint configuration
+### 🔐 Autenticação
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- Login
+- Cadastro
+- Controle de acesso por tipo de usuário
+- Área exclusiva para alunos
+- Área exclusiva para administradores
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+### 🛠️ Área Administrativa
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- Dashboard administrativo
+- Gerenciamento de alunos
+- Gerenciamento de treinos
+- Gerenciamento de exercícios
+- Gerenciamento de vídeos
+- Gerenciamento de dietas
+
+## 📁 Estrutura do Projeto
+
+```text
+src/
+├── assets/
+│   └── videos/
+├── components/
+├── context/
+├── data/
+├── pages/
+│   ├── admin/
+│   ├── aluno/
+│   └── public/
+└── types/
+🎯 Objetivo
+
+Projeto desenvolvido para estudo e construção de portfólio na área de desenvolvimento Full Stack.
+
+A aplicação foi criada com foco em organização de código, componentes reutilizáveis, autenticação e separação de áreas por tipo de usuário.
+
+👨‍💻 Desenvolvedor
+
+José Victor
+
+Desenvolvedor em formação, com foco em desenvolvimento Full Stack.
+
+🧑‍💻 Stack
+
+React TypeScript Node.js  PostgreSQL
+
+⭐ Projeto desenvolvido para fins de estudo e portfólio.
