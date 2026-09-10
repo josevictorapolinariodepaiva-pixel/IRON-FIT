@@ -1,17 +1,17 @@
-import { Treino } from "../types/Treino";
+import type { Treino } from "../types/Treino";
 
 export const treinos: Treino[] = [
   {
     id: 1,
-    nome: "Treino A - Peito e Tríceps",
-    descricao: "Treino focado em peito, tríceps e músculos auxiliares.",
+    nome: "Treino A - Peito e Trï¿½ceps",
+    descricao: "Treino focado em peito, trï¿½ceps e mï¿½sculos auxiliares.",
     nivel: "iniciante",
     duracao: 60
   },
   {
     id: 2,
-    nome: "Treino B - Costas e Bíceps",
-    descricao: "Treino para desenvolvimento das costas e braços.",
+    nome: "Treino B - Costas e Bï¿½ceps",
+    descricao: "Treino para desenvolvimento das costas e braï¿½os.",
     nivel: "intermediario",
     duracao: 70
   },

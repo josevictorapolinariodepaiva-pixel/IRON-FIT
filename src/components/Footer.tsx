@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer>
       <p>
-        © 2026 Sistema de Academia
+        Â© 2026 Sistema de Academia
       </p>
     </footer>
   );

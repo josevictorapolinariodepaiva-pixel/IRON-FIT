@@ -8,8 +8,8 @@ function TreinoCard({ nome, nivel, duracao }: TreinoCardProps) {
   return (
     <div>
       <h3>{nome}</h3>
-      <p>Nível: {nivel}</p>
-      <p>Duração: {duracao}</p>
+      <p>NÃ­vel: {nivel}</p>
+      <p>DuraÃ§Ã£o: {duracao}</p>
     </div>
   );
 }

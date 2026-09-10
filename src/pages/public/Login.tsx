@@ -1,92 +1,55 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../context/AuthContext";
-import type { TipoUsuario } from "../../types/Auth";
+import "./Login.css";
 
 function Login() {
-
   const navigate = useNavigate();
-
-  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const [tipo, setTipo] =
-    useState<TipoUsuario>("aluno");
-
-  const handleSubmit = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    login(email, senha, tipo);
+    console.log("Login:", {
+      email,
+      senha
+    });
 
-    navigate(
-      tipo === "admin"
-        ? "/admin"
-        : "/aluno"
-    );
+    // Temporariamente
+    navigate("/aluno");
   };
 
   return (
-    <main>
+    <main className="login-page">
 
-      <div className="form-container">
+      <section className="login-card">
+
+        <div className="login-logo">
+          IRON<span>FIT</span>
+        </div>
 
         <div className="login-header">
 
-          <div className="login-icon">
-            ???
-          </div>
+          <span>
+            ACESSO Ã€ PLATAFORMA
+          </span>
 
-          <h1>Bem-vindo</h1>
+          <h1>
+            Bem-vindo
+            <strong> de volta.</strong>
+          </h1>
 
           <p>
-            Entre na sua conta da academia.
+            Entre na sua conta para acessar
+            sua Ã¡rea do IRONFIT.
           </p>
 
         </div>
 
         <form onSubmit={handleSubmit}>
-
-          <div className="form-group">
-
-            <label>
-              Tipo de acesso
-            </label>
-
-            <div className="role-selector">
-
-              <button
-                type="button"
-                className={
-                  tipo === "aluno"
-                    ? "role-button active"
-                    : "role-button"
-                }
-                onClick={() => setTipo("aluno")}
-              >
-                ?? Aluno
-              </button>
-
-              <button
-                type="button"
-                className={
-                  tipo === "admin"
-                    ? "role-button active"
-                    : "role-button"
-                }
-                onClick={() => setTipo("admin")}
-              >
-                ??? Administrador
-              </button>
-
-            </div>
-
-          </div>
 
           <div className="form-group">
 
@@ -97,11 +60,11 @@ function Login() {
             <input
               id="email"
               type="email"
+              placeholder="seu@email.com"
               value={email}
               onChange={(event) =>
                 setEmail(event.target.value)
               }
-              placeholder="seu@email.com"
               required
             />
 
@@ -116,33 +79,53 @@ function Login() {
             <input
               id="senha"
               type="password"
+              placeholder="Digite sua senha"
               value={senha}
               onChange={(event) =>
                 setSenha(event.target.value)
               }
-              placeholder="Digite sua senha"
               required
             />
 
           </div>
 
+          <div className="login-options">
+
+            <Link to="#">
+              Esqueci minha senha
+            </Link>
+
+          </div>
+
           <button
-            className="form-submit"
             type="submit"
+            className="login-button"
           >
             Entrar
           </button>
 
         </form>
 
-        <p className="form-footer">
-          Ainda n�o possui uma conta?{" "}
-          <Link to="/cadastro">
-            Criar conta
-          </Link>
-        </p>
+        <div className="login-register">
 
-      </div>
+          <span>
+            Ainda nÃ£o possui uma conta?
+          </span>
+
+          <Link to="/cadastro">
+            Criar cadastro
+          </Link>
+
+        </div>
+
+        <Link
+          to="/"
+          className="login-back"
+        >
+          â† Voltar para o inÃ­cio
+        </Link>
+
+      </section>
 
     </main>
   );

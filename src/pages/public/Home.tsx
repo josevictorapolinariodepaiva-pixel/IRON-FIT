@@ -7,65 +7,36 @@ import {
 import "./Home.css";
 
 import video from "../../assets/videos/academia.mp4";
-
+import gifBackground from "../../assets/gifs/ironfit.gif";
 
 function Home() {
+  const [showContent, setShowContent] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [videoStep, setVideoStep] = useState(1);
 
-  const [showContent, setShowContent] =
-    useState(false);
-
-  const [scrollProgress, setScrollProgress] =
-    useState(0);
-
-  const [videoStep, setVideoStep] =
-    useState(1);
-
-
-  const videoRef =
-    useRef<HTMLVideoElement>(null);
-
-  const sectionRef =
-    useRef<HTMLElement>(null);
-
-
-  /* =========================================
-     CONTROLE DO VÍDEO PELO SCROLL
-  ========================================= */
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-
     let animationId = 0;
-
     let targetTime = 0;
-
     let smoothTime = 0;
-
     let lastProgress = -1;
 
-
     const updateVideo = () => {
-
-      const videoElement =
-        videoRef.current;
-
-      const section =
-        sectionRef.current;
-
+      const videoElement = videoRef.current;
+      const section = sectionRef.current;
 
       if (
         videoElement &&
         section &&
         videoElement.duration > 0
       ) {
-
-        const rect =
-          section.getBoundingClientRect();
-
+        const rect = section.getBoundingClientRect();
 
         const sectionHeight =
           section.offsetHeight -
           window.innerHeight;
-
 
         const progress =
           sectionHeight > 0
@@ -78,30 +49,14 @@ function Home() {
               )
             : 0;
 
-
-        /* ================================
-           PORCENTAGEM
-        ================================= */
-
         if (
           Math.abs(
             progress - lastProgress
           ) > 0.001
         ) {
-
-          lastProgress =
-            progress;
-
-          setScrollProgress(
-            progress
-          );
-
+          lastProgress = progress;
+          setScrollProgress(progress);
         }
-
-
-        /* ================================
-           TEMPO DO VÍDEO
-        ================================= */
 
         targetTime =
           progress *
@@ -110,13 +65,11 @@ function Home() {
             0
           );
 
-
         smoothTime +=
           (
             targetTime -
             smoothTime
           ) * 0.12;
-
 
         if (
           Math.abs(
@@ -124,105 +77,56 @@ function Home() {
             smoothTime
           ) > 0.01
         ) {
-
           videoElement.currentTime =
             smoothTime;
-
         }
-
-
-        /* ================================
-           ETAPAS DA INTRODUÇÃO
-        ================================= */
 
         if (progress < 0.30) {
-
           setVideoStep(1);
-
           setShowContent(false);
-
-        }
-
-        else if (progress < 0.70) {
-
+        } else if (progress < 0.70) {
           setVideoStep(2);
-
           setShowContent(false);
-
-        }
-
-        else {
-
+        } else {
           setVideoStep(3);
-
           setShowContent(true);
-
         }
-
       }
-
 
       animationId =
         requestAnimationFrame(
           updateVideo
         );
-
     };
 
-
-    /* =====================================
-       METADATA DO VÍDEO
-    ===================================== */
-
     const handleLoadedMetadata = () => {
-
       const videoElement =
         videoRef.current;
-
 
       if (!videoElement) {
         return;
       }
 
-
-      /*
-        O vídeo começa parado
-        no primeiro frame.
-      */
-
       videoElement.pause();
 
       smoothTime = 0;
-
       targetTime = 0;
 
-
-      videoElement.currentTime =
-        0.001;
-
+      videoElement.currentTime = 0.001;
 
       animationId =
         requestAnimationFrame(
           updateVideo
         );
-
     };
-
 
     const videoElement =
       videoRef.current;
 
-
     if (videoElement) {
-
-      if (
-        videoElement.readyState >= 1
-      ) {
-
+      if (videoElement.readyState >= 1) {
         handleLoadedMetadata();
-
       } else {
-
         videoElement.addEventListener(
           "loadedmetadata",
           handleLoadedMetadata,
@@ -230,116 +134,84 @@ function Home() {
             once: true
           }
         );
-
       }
-
     }
 
-
     return () => {
-
       cancelAnimationFrame(
         animationId
       );
-
     };
-
   }, []);
 
-
-  /* =========================================
-     NAVEGAÇÃO
-  ========================================= */
-
   const goToHero = () => {
-
     document
       .querySelector(".hero")
       ?.scrollIntoView({
         behavior: "smooth"
       });
-
   };
-
-
-  const goToPlans = () => {
-
-    document
-      .querySelector(".plans")
-      ?.scrollIntoView({
-        behavior: "smooth"
-      });
-
-  };
-
 
   const goToBenefits = () => {
-
     document
       .querySelector(".benefits")
       ?.scrollIntoView({
         behavior: "smooth"
       });
-
   };
 
+  const goToCadastro = () => {
+    window.location.href = "/cadastro";
+  };
+
+  const goToLogin = () => {
+    window.location.href = "/login";
+  };
 
   return (
-
     <main>
 
-
-      {/* =====================================
-          NAVBAR
-      ===================================== */}
+      {/* NAVBAR */}
 
       <nav className="navbar">
 
         <div className="navbar-logo">
-
           IRON<span>FIT</span>
-
         </div>
-
 
         <div className="navbar-links">
 
           <a href="/">
-            Início
+            InÃ­cio
           </a>
 
-
           <a
-            href="#beneficios"
+            href="#recursos"
             onClick={(event) => {
-
               event.preventDefault();
-
               goToBenefits();
-
             }}
           >
-            Benefícios
+            Recursos
           </a>
-
 
           <a
-            href="#planos"
+            href="/cadastro"
             onClick={(event) => {
-
               event.preventDefault();
-
-              goToPlans();
-
+              goToCadastro();
             }}
           >
-            Planos
+            Cadastro
           </a>
-
 
           <a
             href="/login"
             className="navbar-login"
+            onClick={(event) => {
+              event.preventDefault();
+              goToLogin();
+            }}
           >
             Entrar
           </a>
@@ -349,10 +221,7 @@ function Home() {
       </nav>
 
 
-
-      {/* =====================================
-          INTRODUÇÃO EM VÍDEO
-      ===================================== */}
+      {/* VÃDEO */}
 
       <section
         className="video-scroll"
@@ -360,11 +229,6 @@ function Home() {
       >
 
         <div className="video-sticky">
-
-
-          {/* =================================
-              VÍDEO
-          ================================= */}
 
           <video
             ref={videoRef}
@@ -375,19 +239,10 @@ function Home() {
             preload="auto"
           />
 
-
-
-          {/* =================================
-              OVERLAY ESCURO
-          ================================= */}
-
           <div className="video-dark-overlay"></div>
 
 
-
-          {/* =================================
-              ETAPA 01
-          ================================= */}
+          {/* ETAPA 01 */}
 
           <div
             className={
@@ -403,21 +258,15 @@ function Home() {
               01
             </div>
 
-
             <div className="step-line"></div>
-
 
             <span>
               ROLE PARA BAIXO
             </span>
 
-
             <div className="scroll-mouse">
-
               <div className="scroll-wheel"></div>
-
             </div>
-
 
             <small>
               DESCUBRA O QUE VEM A SEGUIR
@@ -426,10 +275,7 @@ function Home() {
           </div>
 
 
-
-          {/* =================================
-              ETAPA 02
-          ================================= */}
+          {/* ETAPA 02 */}
 
           <div
             className={
@@ -447,31 +293,24 @@ function Home() {
                 02
               </span>
 
-
               <span>
-                CARREGANDO EXPERIÊNCIA
+                CARREGANDO EXPERIÃŠNCIA
               </span>
 
             </div>
 
-
             <div className="loading-title">
-
               PREPARE-SE
-
             </div>
-
 
             <div className="loading-percentage">
 
               {Math.round(
                 scrollProgress * 100
               )}
-
               %
 
             </div>
-
 
             <div className="loading-bar">
 
@@ -485,20 +324,14 @@ function Home() {
 
             </div>
 
-
             <span className="loading-text">
-
-              CONSTRUINDO SUA EXPERIÊNCIA...
-
+              CONSTRUINDO SUA EXPERIÃŠNCIA...
             </span>
 
           </div>
 
 
-
-          {/* =================================
-              ETAPA 03
-          ================================= */}
+          {/* ETAPA 03 */}
 
           <div
             className={
@@ -511,51 +344,38 @@ function Home() {
           >
 
             <div className="final-step">
-
               03
               <span></span>
-              EXPERIÊNCIA LIBERADA
-
+              EXPERIÃŠNCIA LIBERADA
             </div>
 
-
             <span className="video-label">
-
-              BEM-VINDO À
-
+              BEM-VINDO Ã€ PLATAFORMA
             </span>
 
-
             <h1>
-
               IRON<span>FIT</span>
-
             </h1>
 
-
             <p>
-
-              Treine mais forte.
-              Evolua todos os dias.
-              Transforme o seu limite.
-
+              Uma plataforma completa para
+              gerenciamento de academia,
+              reunindo treinos, exercÃ­cios,
+              vÃ­deos, dietas e acompanhamento
+              em um Ãºnico sistema.
             </p>
-
 
             <div className="video-buttons">
 
-              <button
-                onClick={goToHero}
-              >
-                Conhecer a academia
+              <button onClick={goToHero}>
+                Conhecer a plataforma
               </button>
-
 
               <button
                 className="secondary-button"
-                onClick={goToPlans}
+                onClick={goToBenefits}
               >
-                Ver planos
+                Ver recursos
               </button>
 
             </div>
@@ -563,35 +383,24 @@ function Home() {
           </div>
 
 
-
-          {/* =================================
-              HUD INFERIOR
-          ================================= */}
+          {/* HUD */}
 
           <div className="game-hud">
-
 
             <div className="game-status">
 
               <span>
-
                 ETAPA 0{videoStep}
-
               </span>
 
-
               <strong>
-
                 {Math.round(
                   scrollProgress * 100
                 )}
-
                 %
-
               </strong>
 
             </div>
-
 
             <div className="game-progress">
 
@@ -605,17 +414,12 @@ function Home() {
 
             </div>
 
-
           </div>
 
 
-
-          {/* =================================
-              INDICADORES 01 / 02 / 03
-          ================================= */}
+          {/* INDICADOR */}
 
           <div className="video-steps-indicator">
-
 
             <div
               className={
@@ -625,9 +429,8 @@ function Home() {
               }
             >
               <span>01</span>
-              <small>INÍCIO</small>
+              <small>INÃCIO</small>
             </div>
-
 
             <div
               className={
@@ -637,9 +440,8 @@ function Home() {
               }
             >
               <span>02</span>
-              <small>PREPARAÇÃO</small>
+              <small>PREPARAÃ‡ÃƒO</small>
             </div>
-
 
             <div
               className={
@@ -652,125 +454,90 @@ function Home() {
               <small>IRONFIT</small>
             </div>
 
-
           </div>
-
 
         </div>
 
       </section>
 
 
-
-      {/* =====================================
-          HERO PRINCIPAL
-      ===================================== */}
+      {/* HERO */}
 
       <section className="hero">
 
+        {/* ÃšNICO GIF DA SECTION */}
+
+        <img
+          src={gifBackground}
+          className="section-fire"
+          alt=""
+        />
+
         <div className="hero-content">
 
-
           <span className="hero-badge">
-
             <span className="hero-badge-dot"></span>
-
-            PERFORMANCE • DISCIPLINA • EVOLUÇÃO
-
+            PERFORMANCE â€¢ DISCIPLINA â€¢ EVOLUÃ‡ÃƒO
           </span>
 
-
           <h1>
-
             Seu corpo.
-
-            <span>
-              Seu limite.
-            </span>
-
+            <span>Seu limite.</span>
           </h1>
 
-
           <p>
-
-            Uma experiência completa para quem
-            leva treinamento a sério. Estrutura,
-            tecnologia e acompanhamento para
-            você evoluir todos os dias.
-
+            Uma plataforma completa para
+            gerenciamento de academia, reunindo
+            treinos, exercÃ­cios, vÃ­deos, dietas,
+            progresso e gestÃ£o de alunos em
+            um Ãºnico sistema.
           </p>
-
 
           <div className="hero-actions">
 
             <button
               className="primary-button"
-              onClick={goToPlans}
+              onClick={goToBenefits}
             >
-              Começar agora
+              Conhecer recursos
             </button>
-
 
             <button
               className="outline-button"
-              onClick={goToPlans}
+              onClick={goToCadastro}
             >
-              Conhecer planos
+              Criar cadastro
             </button>
 
           </div>
 
-
-
-          {/* ESTATÍSTICAS */}
-
           <div className="hero-stats">
 
             <div>
-
-              <strong>
-                2.500+
-              </strong>
-
+              <strong>06</strong>
               <span>
-                Alunos ativos
+                MÃ³dulos do sistema
               </span>
-
             </div>
 
-
             <div>
-
-              <strong>
-                15+
-              </strong>
-
+              <strong>02</strong>
               <span>
-                Anos de experiência
+                Tipos de usuÃ¡rio
               </span>
-
             </div>
 
-
             <div>
-
-              <strong>
-                24h
-              </strong>
-
+              <strong>100%</strong>
               <span>
-                Estrutura disponível
+                Projeto responsivo
               </span>
-
             </div>
 
           </div>
 
         </div>
 
-
-
-        {/* CARD */}
 
         <div className="hero-gym-card">
 
@@ -781,66 +548,40 @@ function Home() {
             </span>
 
             <span className="gym-status">
-              ● ABERTO
+              â— SISTEMA ONLINE
             </span>
 
           </div>
-
 
           <div className="gym-card-content">
 
             <span className="gym-card-label">
-              TREINAMENTO
+              PLATAFORMA
             </span>
 
-
             <h2>
-
-              FORÇA
-
-              <span>
-                & PERFORMANCE
-              </span>
-
+              TREINO
+              <span>& PERFORMANCE</span>
             </h2>
 
-
             <p>
-
-              Equipamentos profissionais,
-              ambiente premium e tudo que
-              você precisa para evoluir.
-
+              Uma experiÃªncia digital para
+              organizar treinos, exercÃ­cios,
+              vÃ­deos, dietas e evoluÃ§Ã£o.
             </p>
 
           </div>
 
-
           <div className="gym-card-bottom">
 
             <div>
-
-              <span>
-                ESTRUTURA
-              </span>
-
-              <strong>
-                PREMIUM
-              </strong>
-
+              <span>ÃREA</span>
+              <strong>ALUNO</strong>
             </div>
 
-
             <div>
-
-              <span>
-                FOCO
-              </span>
-
-              <strong>
-                RESULTADO
-              </strong>
-
+              <span>ÃREA</span>
+              <strong>ADMIN</strong>
             </div>
 
           </div>
@@ -850,31 +591,35 @@ function Home() {
       </section>
 
 
-
-      {/* =====================================
-          BENEFÍCIOS
-      ===================================== */}
+      {/* RECURSOS */}
 
       <section
         className="benefits"
-        id="beneficios"
+        id="recursos"
       >
+
+        {/* ÃšNICO GIF DA SECTION */}
+
+        <img
+          src={gifBackground}
+          className="section-fire"
+          alt=""
+        />
 
         <div className="benefits-header">
 
           <span className="section-badge">
-            POR QUE TREINAR AQUI
+            RECURSOS DA PLATAFORMA
           </span>
 
-
           <h2>
-            Mais do que uma academia.
+            Mais do que uma interface.
           </h2>
 
-
           <p>
-            Um ambiente criado para transformar
-            treinamento em evolução.
+            Um sistema pensado para organizar
+            diferentes Ã¡reas de uma academia
+            em uma Ãºnica experiÃªncia.
           </p>
 
         </div>
@@ -889,25 +634,21 @@ function Home() {
               01
             </span>
 
-
             <div className="benefit-icon">
-              ⚡
+              âš¡
             </div>
 
-
             <h3>
-              Alta performance
+              GestÃ£o de treinos
             </h3>
 
-
             <p>
-              Estrutura preparada para quem
-              busca força, condicionamento
-              e evolução constante.
+              OrganizaÃ§Ã£o de treinos e exercÃ­cios
+              para facilitar o acompanhamento
+              da rotina dos alunos.
             </p>
 
           </article>
-
 
 
           <article className="benefit-card">
@@ -916,25 +657,21 @@ function Home() {
               02
             </span>
 
-
             <div className="benefit-icon">
-              ◈
+              â—ˆ
             </div>
 
-
             <h3>
-              Estrutura premium
+              Biblioteca de vÃ­deos
             </h3>
 
-
             <p>
-              Equipamentos modernos e um
-              ambiente pensado para melhorar
-              sua experiência de treino.
+              Ãrea dedicada a vÃ­deos de treinamento,
+              permitindo organizar conteÃºdos por
+              categoria e nÃ­vel.
             </p>
 
           </article>
-
 
 
           <article className="benefit-card">
@@ -943,239 +680,88 @@ function Home() {
               03
             </span>
 
+            <div className="benefit-icon">
+              â†‘
+            </div>
+
+            <h3>
+              Acompanhamento
+            </h3>
+
+            <p>
+              VisualizaÃ§Ã£o de progresso, informaÃ§Ãµes
+              do aluno e acompanhamento de sua
+              evoluÃ§Ã£o ao longo do tempo.
+            </p>
+
+          </article>
+
+
+          <article className="benefit-card">
+
+            <span className="benefit-number">
+              04
+            </span>
 
             <div className="benefit-icon">
-              ↑
+              â—‰
             </div>
 
-
             <h3>
-              Evolução constante
+              Ãrea do aluno
             </h3>
 
-
             <p>
-              Treine com consistência e acompanhe
-              sua evolução em cada etapa.
+              Um espaÃ§o prÃ³prio para acessar
+              treinos, exercÃ­cios, dieta, vÃ­deos,
+              progresso e perfil.
             </p>
 
           </article>
 
-        </div>
 
-      </section>
+          <article className="benefit-card">
 
-
-
-      {/* =====================================
-          PLANOS
-      ===================================== */}
-
-      <section
-        className="plans"
-        id="planos"
-      >
-
-        <div className="plans-header">
-
-          <span className="section-badge">
-            PLANOS
-          </span>
-
-
-          <h2>
-            Escolha seu ritmo.
-          </h2>
-
-
-          <p>
-            Comece hoje e leve seu treinamento
-            para outro nível.
-          </p>
-
-        </div>
-
-
-        <div className="plans-grid">
-
-
-          <article className="plan-card">
-
-            <span className="plan-name">
-              START
+            <span className="benefit-number">
+              05
             </span>
 
-
-            <h3>
-              Essencial
-            </h3>
-
-
-            <p>
-              Para quem está começando.
-            </p>
-
-
-            <div className="plan-price">
-
-              <small>
-                R$
-              </small>
-
-              89
-
-              <span>
-                /mês
-              </span>
-
+            <div className="benefit-icon">
+              â—†
             </div>
 
+            <h3>
+              Ãrea administrativa
+            </h3>
 
-            <ul>
-
-              <li>
-                ✓ Acesso à academia
-              </li>
-
-              <li>
-                ✓ Área de musculação
-              </li>
-
-              <li>
-                ✓ Área cardiovascular
-              </li>
-
-            </ul>
-
-
-            <button>
-              Escolher plano
-            </button>
+            <p>
+              Painel destinado ao gerenciamento
+              de alunos, treinos, exercÃ­cios,
+              vÃ­deos e dietas.
+            </p>
 
           </article>
 
 
+          <article className="benefit-card">
 
-          <article
-            className="plan-card featured-plan"
-          >
-
-            <span className="plan-popular">
-              MAIS ESCOLHIDO
+            <span className="benefit-number">
+              06
             </span>
 
-
-            <span className="plan-name">
-              PERFORMANCE
-            </span>
-
-
-            <h3>
-              Premium
-            </h3>
-
-
-            <p>
-              Para quem quer evoluir.
-            </p>
-
-
-            <div className="plan-price">
-
-              <small>
-                R$
-              </small>
-
-              129
-
-              <span>
-                /mês
-              </span>
-
+            <div className="benefit-icon">
+              ðŸ”
             </div>
 
-
-            <ul>
-
-              <li>
-                ✓ Tudo do plano Essencial
-              </li>
-
-              <li>
-                ✓ Avaliação física
-              </li>
-
-              <li>
-                ✓ Acompanhamento
-              </li>
-
-              <li>
-                ✓ Área funcional
-              </li>
-
-            </ul>
-
-
-            <button>
-              Começar agora
-            </button>
-
-          </article>
-
-
-
-          <article className="plan-card">
-
-            <span className="plan-name">
-              ELITE
-            </span>
-
-
             <h3>
-              Black
+              Controle de acesso
             </h3>
 
-
             <p>
-              Experiência completa.
+              SeparaÃ§Ã£o das Ã¡reas do sistema
+              de acordo com o tipo de usuÃ¡rio,
+              aluno ou administrador.
             </p>
-
-
-            <div className="plan-price">
-
-              <small>
-                R$
-              </small>
-
-              179
-
-              <span>
-                /mês
-              </span>
-
-            </div>
-
-
-            <ul>
-
-              <li>
-                ✓ Tudo do Premium
-              </li>
-
-              <li>
-                ✓ Personal trainer
-              </li>
-
-              <li>
-                ✓ Plano personalizado
-              </li>
-
-            </ul>
-
-
-            <button>
-              Escolher plano
-            </button>
 
           </article>
 
@@ -1185,52 +771,60 @@ function Home() {
       </section>
 
 
-
-      {/* =====================================
-          CTA FINAL
-      ===================================== */}
+      {/* CTA FINAL */}
 
       <section className="final-cta">
 
-        <span>
-          SEU PRÓXIMO NÍVEL COMEÇA AGORA
-        </span>
+        {/* ÃšNICO GIF DA SECTION */}
 
+        <img
+          src={gifBackground}
+          className="section-fire"
+          alt=""
+        />
 
-        <h2>
+        <div className="final-cta-content">
 
-          NÃO ESPERE
+          <span className="final-cta-label">
+            PLATAFORMA IRONFIT
+          </span>
 
-          <strong>
-            A MOTIVAÇÃO.
-          </strong>
+          <h2>
+            TREINO.
+            <strong>EVOLUÃ‡ÃƒO.</strong>
+          </h2>
 
-        </h2>
+          <p>
+            Uma experiÃªncia digital criada para
+            conectar alunos, treinos, exercÃ­cios,
+            vÃ­deos e acompanhamento em um
+            Ãºnico lugar.
+          </p>
 
+          <div className="hero-actions">
 
-        <p>
+            <button
+              className="primary-button"
+              onClick={goToCadastro}
+            >
+              Criar cadastro
+            </button>
 
-          Construa disciplina.
-          Construa força.
-          Construa sua melhor versão.
+            <button
+              className="outline-button"
+              onClick={goToLogin}
+            >
+              Entrar no sistema
+            </button>
 
-        </p>
+          </div>
 
-
-        <button
-          onClick={goToPlans}
-        >
-          Quero começar →
-        </button>
+        </div>
 
       </section>
 
-
     </main>
-
   );
-
 }
-
 
 export default Home;

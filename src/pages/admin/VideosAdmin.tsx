@@ -1,165 +1,233 @@
-import { FormEvent, useState } from "react";
-import Navbar from "../../components/Navbar";
+Ôªøimport { useState } from "react";
+import type { FormEvent } from "react";
+import { Link } from "react-router-dom";
+import "./VideosAdmin.css";
+
+type Video = {
+  id: number;
+  titulo: string;
+  descricao: string;
+  categoria: string;
+  nivel: string;
+  url: string;
+};
 
 function VideosAdmin() {
+  const [videos, setVideos] = useState<Video[]>([
+    {
+      id: 1,
+      titulo: "Como executar o supino reto",
+      descricao: "T√©cnica correta e principais cuidados.",
+      categoria: "Peito",
+      nivel: "Iniciante",
+      url: "https://www.youtube.com/",
+    },
+    {
+      id: 2,
+      titulo: "Execu√ß√£o do agachamento livre",
+      descricao: "Aprenda a realizar o movimento corretamente.",
+      categoria: "Pernas",
+      nivel: "Intermedi√°rio",
+      url: "https://www.youtube.com/",
+    },
+    {
+      id: 3,
+      titulo: "Tr√≠ceps pulley sem erros",
+      descricao: "Dicas para melhorar sua execu√ß√£o.",
+      categoria: "Tr√≠ceps",
+      nivel: "Iniciante",
+      url: "https://www.youtube.com/",
+    },
+  ]);
 
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [categoria, setCategoria] = useState("Peito");
+  const [nivel, setNivel] = useState("Iniciante");
   const [url, setUrl] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [nivel, setNivel] = useState<
-    "iniciante" | "intermediario" | "avancado"
-  >("iniciante");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log({
+    const novoVideo: Video = {
+      id: Date.now(),
       titulo,
       descricao,
-      url,
       categoria,
-      nivel
-    });
+      nivel,
+      url,
+    };
 
-    alert("VÌdeo cadastrado com sucesso!");
+    setVideos((videosAtuais) => [novoVideo, ...videosAtuais]);
 
     setTitulo("");
     setDescricao("");
+    setCategoria("Peito");
+    setNivel("Iniciante");
     setUrl("");
-    setCategoria("");
-    setNivel("iniciante");
+  };
+
+  const removerVideo = (id: number) => {
+    setVideos((videosAtuais) =>
+      videosAtuais.filter((video) => video.id !== id)
+    );
   };
 
   return (
-    <>
-      <Navbar tipo="admin" />
-
-      <main>
-
-        <div className="form-container">
-
-          <h1>Cadastrar VÌdeo</h1>
-
+    <main className="videos-admin-page">
+      <header className="videos-admin-header">
+        <div>
+          <span>GERENCIAMENTO</span>
+          <h1>Seus <strong>v√≠deos.</strong></h1>
           <p>
-            Adicione uma nova videoaula para os alunos.
+            Adicione, organize e gerencie os conte√∫dos dispon√≠veis para os
+            alunos da IRONFIT.
           </p>
+        </div>
 
-          <form onSubmit={handleSubmit}>
+        <Link to="/admin" className="videos-admin-back">
+          ‚Üê Dashboard
+        </Link>
+      </header>
 
-            <div className="form-group">
-              <label htmlFor="titulo">
-                TÌtulo
-              </label>
+      <section className="videos-admin-layout">
+        <section className="videos-admin-form-panel">
+          <div className="videos-admin-section-header">
+            <span>NOVO CONTE√öDO</span>
+            <h2>Adicionar v√≠deo</h2>
+            <p>
+              Cadastre um v√≠deo do YouTube para disponibilizar aos alunos.
+            </p>
+          </div>
 
+          <form onSubmit={handleSubmit} className="videos-admin-form">
+            <div className="videos-admin-form-group">
+              <label htmlFor="titulo">T√≠tulo</label>
               <input
                 id="titulo"
+                type="text"
+                placeholder="Ex.: Como executar o supino"
                 value={titulo}
                 onChange={(event) => setTitulo(event.target.value)}
-                placeholder="Treino de Peito"
                 required
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="descricao">
-                DescriÁ„o
-              </label>
-
+            <div className="videos-admin-form-group">
+              <label htmlFor="descricao">Descri√ß√£o</label>
               <textarea
                 id="descricao"
+                placeholder="Descreva brevemente o conte√∫do..."
                 value={descricao}
                 onChange={(event) => setDescricao(event.target.value)}
-                placeholder="DescriÁ„o da videoaula"
                 required
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="url">
-                URL do YouTube
-              </label>
+            <div className="videos-admin-form-row">
+              <div className="videos-admin-form-group">
+                <label htmlFor="categoria">Categoria</label>
+                <select
+                  id="categoria"
+                  value={categoria}
+                  onChange={(event) => setCategoria(event.target.value)}
+                >
+                  <option>Peito</option>
+                  <option>Costas</option>
+                  <option>Pernas</option>
+                  <option>Ombros</option>
+                  <option>B√≠ceps</option>
+                  <option>Tr√≠ceps</option>
+                  <option>Abd√¥men</option>
+                  <option>Cardio</option>
+                </select>
+              </div>
 
+              <div className="videos-admin-form-group">
+                <label htmlFor="nivel">N√≠vel</label>
+                <select
+                  id="nivel"
+                  value={nivel}
+                  onChange={(event) => setNivel(event.target.value)}
+                >
+                  <option>Iniciante</option>
+                  <option>Intermedi√°rio</option>
+                  <option>Avan√ßado</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="videos-admin-form-group">
+              <label htmlFor="url">URL do YouTube</label>
               <input
                 id="url"
                 type="url"
+                placeholder="https://www.youtube.com/watch?v=..."
                 value={url}
                 onChange={(event) => setUrl(event.target.value)}
-                placeholder="https://youtube.com/watch?v=..."
                 required
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="categoria">
-                Categoria
-              </label>
-
-              <select
-                id="categoria"
-                value={categoria}
-                onChange={(event) => setCategoria(event.target.value)}
-                required
-              >
-                <option value="">
-                  Selecione
-                </option>
-
-                <option value="Peito">Peito</option>
-                <option value="Costas">Costas</option>
-                <option value="Pernas">Pernas</option>
-                <option value="Ombros">Ombros</option>
-                <option value="BÌceps">BÌceps</option>
-                <option value="TrÌceps">TrÌceps</option>
-                <option value="AbdÙmen">AbdÙmen</option>
-                <option value="Cardio">Cardio</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="nivel">
-                NÌvel
-              </label>
-
-              <select
-                id="nivel"
-                value={nivel}
-                onChange={(event) =>
-                  setNivel(
-                    event.target.value as
-                      | "iniciante"
-                      | "intermediario"
-                      | "avancado"
-                  )
-                }
-              >
-                <option value="iniciante">
-                  Iniciante
-                </option>
-
-                <option value="intermediario">
-                  Intermedi·rio
-                </option>
-
-                <option value="avancado">
-                  AvanÁado
-                </option>
-              </select>
-            </div>
-
-            <button
-              className="form-submit"
-              type="submit"
-            >
-              Cadastrar vÌdeo
+            <button type="submit" className="videos-admin-submit">
+              + Adicionar v√≠deo
             </button>
-
           </form>
+        </section>
 
-        </div>
+        <section className="videos-admin-list-panel">
+          <div className="videos-admin-section-header">
+            <div className="videos-admin-list-title">
+              <div>
+                <span>BIBLIOTECA</span>
+                <h2>V√≠deos cadastrados</h2>
+              </div>
 
-      </main>
-    </>
+              <strong>{videos.length}</strong>
+            </div>
+          </div>
+
+          <div className="videos-admin-list">
+            {videos.map((video) => (
+              <article className="video-admin-card" key={video.id}>
+                <div className="video-admin-thumb">
+                  <span>‚ñ∂</span>
+                </div>
+
+                <div className="video-admin-info">
+                  <div className="video-admin-tags">
+                    <span>{video.categoria}</span>
+                    <span>{video.nivel}</span>
+                  </div>
+
+                  <h3>{video.titulo}</h3>
+                  <p>{video.descricao}</p>
+
+                  <div className="video-admin-actions">
+                    <a
+                      href={video.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="video-admin-watch"
+                    >
+                      Assistir ‚Üí
+                    </a>
+
+                    <button
+                      type="button"
+                      className="video-admin-delete"
+                      onClick={() => removerVideo(video.id)}
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }
 

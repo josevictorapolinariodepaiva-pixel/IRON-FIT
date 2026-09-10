@@ -1,0 +1,514 @@
+/* =========================================
+   CADASTRO — IRONFIT
+========================================= */
+
+.cadastro-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  padding: 40px 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(229, 9, 20, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(229, 9, 20, 0.12),
+      transparent 35%
+    ),
+    #070707;
+
+  color: #ffffff;
+}
+
+/* =========================================
+   BRILHOS DE FUNDO
+========================================= */
+
+.cadastro-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  top: -300px;
+  left: -250px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(229, 9, 20, 0.15),
+      transparent 70%
+    );
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+.cadastro-page::after {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -250px;
+  bottom: -250px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(229, 9, 20, 0.12),
+      transparent 70%
+    );
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.cadastro-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 500px;
+
+  padding: 42px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 30, 30, 0.96),
+      rgba(12, 12, 12, 0.98)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  animation:
+    cadastroCardEnter
+    0.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+/* =========================================
+   LINHA VERMELHA
+========================================= */
+
+.cadastro-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 90px;
+  height: 3px;
+
+  transform: translateX(-50%);
+
+  background: #e50914;
+
+  box-shadow:
+    0 0 20px rgba(229, 9, 20, 0.7);
+
+  border-radius:
+    0 0 10px 10px;
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.cadastro-logo {
+  text-align: center;
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  margin-bottom: 36px;
+}
+
+.cadastro-logo span {
+  color: #e50914;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.cadastro-header {
+  margin-bottom: 30px;
+}
+
+.cadastro-header > span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #e50914;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+}
+
+.cadastro-header h1 {
+  margin: 0;
+
+  font-size: 40px;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  font-weight: 900;
+}
+
+.cadastro-header h1 strong {
+  color: #e50914;
+
+  font-weight: 900;
+}
+
+.cadastro-header p {
+  margin:
+    15px 0 0;
+
+  color: #999999;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  max-width: 380px;
+}
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.cadastro-card form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.cadastro-card .form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.cadastro-card .form-group label {
+  color: #dddddd;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.cadastro-card .form-group input {
+  width: 100%;
+
+  height: 50px;
+
+  padding:
+    0 16px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cadastro-card .form-group input::placeholder {
+  color: #666666;
+}
+
+.cadastro-card .form-group input:hover {
+  background:
+    rgba(255, 255, 255, 0.055);
+}
+
+.cadastro-card .form-group input:focus {
+  border-color: #e50914;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(229, 9, 20, 0.1);
+}
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.cadastro-button {
+  width: 100%;
+
+  height: 54px;
+
+  margin-top: 8px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e50914,
+      #b20710
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 30px
+    rgba(229, 9, 20, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.cadastro-button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 15px 35px
+    rgba(229, 9, 20, 0.35);
+
+  filter:
+    brightness(1.08);
+}
+
+.cadastro-button:active {
+  transform:
+    translateY(0);
+}
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.cadastro-login {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 27px;
+
+  padding-top: 23px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  color: #777777;
+
+  font-size: 12px;
+}
+
+.cadastro-login a {
+  color: #ffffff;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+.cadastro-login a:hover {
+  color: #e50914;
+}
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+.cadastro-back {
+  display: block;
+
+  width: fit-content;
+
+  margin:
+    23px auto 0;
+
+  color: #666666;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+.cadastro-back:hover {
+  color: #ffffff;
+}
+
+/* =========================================
+   ANIMAÇÃO
+========================================= */
+
+@keyframes cadastroCardEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 600px) {
+
+  .cadastro-page {
+    padding:
+      25px 16px;
+  }
+
+  .cadastro-card {
+    padding:
+      35px 25px;
+  }
+
+  .cadastro-logo {
+    margin-bottom: 32px;
+  }
+
+  .cadastro-header h1 {
+    font-size: 36px;
+  }
+
+}
+
+/* =========================================
+   CELULAR PEQUENO
+========================================= */
+
+@media (max-width: 380px) {
+
+  .cadastro-card {
+    padding:
+      30px 20px;
+
+    border-radius: 16px;
+  }
+
+  .cadastro-header h1 {
+    font-size: 32px;
+  }
+
+  .cadastro-header p {
+    font-size: 13px;
+  }
+
+  .cadastro-card .form-group input {
+    height: 48px;
+  }
+
+}

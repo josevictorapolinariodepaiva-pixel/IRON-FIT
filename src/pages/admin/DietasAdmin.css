@@ -1,0 +1,343 @@
+﻿.dietas-admin-page {
+  min-height: 100vh;
+  padding: 42px 5%;
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 45, 45, 0.08), transparent 28%),
+    #090909;
+  color: #f5f5f5;
+}
+
+.dietas-admin-header {
+  max-width: 1400px;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dietas-admin-eyebrow,
+.dieta-section-heading span {
+  display: block;
+  color: #ff3b30;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.dietas-admin-header h1 {
+  margin: 8px 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.dietas-admin-header p {
+  margin: 0;
+  color: #999;
+}
+
+.dietas-back-link {
+  color: #ddd;
+  text-decoration: none;
+  border: 1px solid #292929;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.dietas-back-link:hover {
+  border-color: #ff3b30;
+  color: #fff;
+}
+
+.dietas-admin-stats {
+  max-width: 1400px;
+  margin: 0 auto 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.dieta-stat {
+  padding: 22px;
+  border: 1px solid #252525;
+  border-radius: 14px;
+  background: #111;
+}
+
+.dieta-stat span {
+  color: #8f8f8f;
+  font-size: 0.82rem;
+}
+
+.dieta-stat strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 2rem;
+}
+
+.dietas-admin-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.dieta-form-card,
+.dieta-list-section {
+  border: 1px solid #252525;
+  border-radius: 16px;
+  background: #101010;
+}
+
+.dieta-form-card {
+  padding: 24px;
+  position: sticky;
+  top: 20px;
+}
+
+.dieta-section-heading h2 {
+  margin: 7px 0 22px;
+  font-size: 1.35rem;
+}
+
+.dieta-form-field {
+  margin-bottom: 16px;
+}
+
+.dieta-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dieta-form-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #cfcfcf;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.dieta-form-field input,
+.dieta-form-field select,
+.dieta-form-field textarea,
+.dieta-filters input,
+.dieta-filters select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #2b2b2b;
+  border-radius: 9px;
+  background: #181818;
+  color: #fff;
+  padding: 12px;
+  outline: none;
+  font: inherit;
+}
+
+.dieta-form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.dieta-form-field input:focus,
+.dieta-form-field select:focus,
+.dieta-form-field textarea:focus,
+.dieta-filters input:focus,
+.dieta-filters select:focus {
+  border-color: #ff3b30;
+}
+
+.dieta-submit-button {
+  width: 100%;
+  border: 0;
+  border-radius: 9px;
+  padding: 13px;
+  background: #ff3b30;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dieta-submit-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.dieta-list-section {
+  padding: 24px;
+}
+
+.dieta-list-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dieta-count {
+  color: #888;
+  font-size: 0.82rem;
+  padding-top: 4px;
+}
+
+.dieta-filters {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 210px 160px;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.dieta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dieta-admin-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  background: #151515;
+}
+
+.dieta-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #261313;
+  color: #ff3b30;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.dieta-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.dieta-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dieta-title-row h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.dieta-level {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #222;
+  color: #aaa;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.dieta-meta {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  color: #ff3b30;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.dieta-info p {
+  margin: 7px 0 0;
+  color: #888;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.dieta-delete-button {
+  flex: 0 0 auto;
+  border: 1px solid #3a2020;
+  border-radius: 8px;
+  background: transparent;
+  color: #ff6259;
+  padding: 9px 11px;
+  cursor: pointer;
+}
+
+.dieta-delete-button:hover {
+  background: #2a1111;
+  border-color: #ff3b30;
+}
+
+.dietas-empty {
+  padding: 50px 20px;
+  border: 1px dashed #303030;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.dietas-empty strong,
+.dietas-empty span {
+  display: block;
+}
+
+.dietas-empty span {
+  margin-top: 7px;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1050px) {
+  .dietas-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dieta-form-card {
+    position: static;
+  }
+}
+
+@media (max-width: 850px) {
+  .dietas-admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dieta-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dietas-admin-page {
+    padding: 28px 16px;
+  }
+
+  .dietas-admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dieta-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .dieta-admin-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .dieta-delete-button {
+    margin-left: 62px;
+  }
+}

@@ -1,0 +1,252 @@
+﻿.dieta-page {
+  min-height: 100vh;
+  padding: 50px 6%;
+  background:
+    radial-gradient(circle at top right, rgba(220, 38, 38, 0.08), transparent 30%),
+    #090909;
+  color: #fff;
+}
+
+.dieta-page-header {
+  max-width: 1200px;
+  margin: 0 auto 42px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.dieta-page-header > div > span,
+.dieta-summary > div > span,
+.dieta-content-header span:first-child,
+.dieta-note > span {
+  display: block;
+  margin-bottom: 10px;
+  color: #ef4444;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.dieta-page-header h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.dieta-page-header h1 strong {
+  color: #ef4444;
+}
+
+.dieta-page-header p {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.dieta-back {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.dieta-back:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.dieta-summary {
+  max-width: 1200px;
+  margin: 0 auto 45px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border: 1px solid #27272a;
+  border-radius: 14px;
+  background: #111111;
+}
+
+.dieta-summary h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.dieta-summary p {
+  margin: 8px 0 0;
+  color: #a1a1aa;
+}
+
+.dieta-summary-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.dieta-summary-stats div {
+  min-width: 110px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #27272a;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.dieta-summary-stats strong {
+  color: #ef4444;
+  font-size: 1.5rem;
+}
+
+.dieta-summary-stats span {
+  color: #71717a;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.dieta-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dieta-content-header {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dieta-content-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.dieta-count {
+  color: #71717a;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dieta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dieta-card {
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: center;
+  gap: 25px;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  background: #111111;
+  transition: 0.2s ease;
+}
+
+.dieta-card:hover {
+  border-color: #3f3f46;
+  transform: translateX(3px);
+}
+
+.dieta-time strong {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.dieta-card-content > span {
+  color: #ef4444;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.dieta-card-content h3 {
+  margin: 5px 0;
+  font-size: 1.15rem;
+}
+
+.dieta-card-content p {
+  margin: 0;
+  color: #a1a1aa;
+  font-size: 0.88rem;
+}
+
+.dieta-card-tag {
+  padding: 8px 12px;
+  border: 1px solid #27272a;
+  border-radius: 7px;
+  color: #a1a1aa;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dieta-note {
+  max-width: 1200px;
+  margin: 28px auto 0;
+  padding: 20px 22px;
+  border-left: 2px solid #ef4444;
+  background: #111111;
+}
+
+.dieta-note p {
+  margin: 0;
+  color: #71717a;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 750px) {
+  .dieta-page {
+    padding: 35px 20px;
+  }
+
+  .dieta-page-header,
+  .dieta-summary,
+  .dieta-content-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dieta-summary-stats {
+    width: 100%;
+  }
+
+  .dieta-summary-stats div {
+    flex: 1;
+  }
+
+  .dieta-card {
+    grid-template-columns: 70px 1fr;
+    gap: 15px;
+  }
+
+  .dieta-card-tag {
+    grid-column: 2;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 450px) {
+  .dieta-page-header h1 {
+    font-size: 2.7rem;
+  }
+
+  .dieta-summary {
+    padding: 22px;
+  }
+
+  .dieta-card {
+    padding: 18px;
+  }
+}

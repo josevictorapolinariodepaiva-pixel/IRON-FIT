@@ -37,7 +37,7 @@ function Navbar({ tipo }: NavbarProps) {
           {tipo === "aluno" ? (
             <>
               <Link to="/aluno">
-                Início
+                InÃ­cio
               </Link>
 
               <Link to="/aluno/treino">
@@ -45,7 +45,7 @@ function Navbar({ tipo }: NavbarProps) {
               </Link>
 
               <Link to="/aluno/exercicios">
-                Exercícios
+                ExercÃ­cios
               </Link>
 
               <Link to="/aluno/dieta">
@@ -71,7 +71,7 @@ function Navbar({ tipo }: NavbarProps) {
               </Link>
 
               <Link to="/admin/videos">
-                Vídeos
+                VÃ­deos
               </Link>
 
               <Link to="/admin/treinos">
@@ -79,7 +79,7 @@ function Navbar({ tipo }: NavbarProps) {
               </Link>
 
               <Link to="/admin/exercicios">
-                Exercícios
+                ExercÃ­cios
               </Link>
 
               <Link to="/admin/dietas">

@@ -3,17 +3,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// PÃ¡ginas pÃºblicas
 import Home from "./pages/public/Home";
 import Login from "./pages/public/Login";
 import Cadastro from "./pages/public/Cadastro";
 
+// PÃ¡ginas do aluno
 import DashboardAluno from "./pages/aluno/DashboardAluno";
 import Treino from "./pages/aluno/Treino";
 import Exercicios from "./pages/aluno/Exercicios";
+import Videos from "./pages/aluno/Videos";
 import Dieta from "./pages/aluno/Dieta";
 import Progresso from "./pages/aluno/Progresso";
 import Perfil from "./pages/aluno/Perfil";
 
+// PÃ¡ginas do admin
 import DashboardAdmin from "./pages/admin/DashboardAdmin";
 import AlunosAdmin from "./pages/admin/AlunosAdmin";
 import VideosAdmin from "./pages/admin/VideosAdmin";
@@ -24,10 +28,12 @@ import DietasAdmin from "./pages/admin/DietasAdmin";
 function App() {
   return (
     <AuthProvider>
-
       <BrowserRouter>
-
         <Routes>
+
+          {/* ==================== */}
+          {/* PÃGINAS PÃšBLICAS */}
+          {/* ==================== */}
 
           <Route
             path="/"
@@ -43,6 +49,11 @@ function App() {
             path="/cadastro"
             element={<Cadastro />}
           />
+
+
+          {/* ==================== */}
+          {/* ÃREA DO ALUNO */}
+          {/* ==================== */}
 
           <Route
             path="/aluno"
@@ -67,6 +78,15 @@ function App() {
             element={
               <ProtectedRoute tipo="aluno">
                 <Exercicios />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/aluno/videos"
+            element={
+              <ProtectedRoute tipo="aluno">
+                <Videos />
               </ProtectedRoute>
             }
           />
@@ -97,6 +117,11 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+
+          {/* ==================== */}
+          {/* ÃREA DO ADMIN */}
+          {/* ==================== */}
 
           <Route
             path="/admin"
@@ -152,15 +177,18 @@ function App() {
             }
           />
 
+
+          {/* ==================== */}
+          {/* ROTA NÃƒO ENCONTRADA */}
+          {/* ==================== */}
+
           <Route
             path="*"
             element={<Home />}
           />
 
         </Routes>
-
       </BrowserRouter>
-
     </AuthProvider>
   );
 }

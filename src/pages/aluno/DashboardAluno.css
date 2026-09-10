@@ -1,0 +1,472 @@
+.aluno-dashboard {
+  min-height: 100vh;
+  display: flex;
+  background: #0a0a0a;
+  color: #f5f5f5;
+}
+
+/* SIDEBAR */
+
+.aluno-sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #111111;
+  border-right: 1px solid #242424;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+.aluno-logo {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  padding: 0 12px 40px;
+}
+
+.aluno-logo span {
+  color: #e50914;
+}
+
+.aluno-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aluno-menu a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 15px;
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.aluno-menu a span {
+  width: 20px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.aluno-menu a:hover {
+  color: #fff;
+  background: #1b1b1b;
+}
+
+.aluno-menu a.active {
+  color: #fff;
+  background: #1c1c1c;
+  border-left: 3px solid #e50914;
+}
+
+.aluno-logout {
+  margin-top: auto;
+  padding: 14px 15px;
+  color: #777;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.aluno-logout:hover {
+  color: #e50914;
+  background: #1b1b1b;
+}
+
+/* CONTEÚDO */
+
+.aluno-content {
+  flex: 1;
+  min-width: 0;
+  padding: 45px 55px;
+  max-width: 1500px;
+}
+
+/* HEADER */
+
+.aluno-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 42px;
+}
+
+.aluno-header-label {
+  display: block;
+  color: #e50914;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.aluno-header h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.aluno-header h1 strong {
+  color: #e50914;
+}
+
+.aluno-header p {
+  margin: 10px 0 0;
+  color: #777;
+  font-size: 15px;
+}
+
+.aluno-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.aluno-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e50914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+}
+
+.aluno-profile div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.aluno-profile strong {
+  font-size: 14px;
+}
+
+.aluno-profile span {
+  color: #777;
+  font-size: 12px;
+}
+
+/* STATUS */
+
+.aluno-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 55px;
+}
+
+.status-card {
+  background: #111;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.status-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 9px;
+  background: rgba(229, 9, 20, 0.1);
+  color: #e50914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.status-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.status-card div span {
+  color: #666;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.status-card div strong {
+  font-size: 19px;
+}
+
+/* SEÇÕES */
+
+.aluno-section {
+  margin-bottom: 55px;
+}
+
+.aluno-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.aluno-section-header div span {
+  display: block;
+  color: #e50914;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  margin-bottom: 7px;
+}
+
+.aluno-section-header h2 {
+  margin: 0;
+  font-size: 25px;
+  letter-spacing: -0.5px;
+}
+
+.aluno-section-header a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.aluno-section-header a:hover {
+  color: #e50914;
+}
+
+/* TREINO */
+
+.treino-card {
+  background: linear-gradient(
+    110deg,
+    #171717,
+    #101010
+  );
+  border: 1px solid #292929;
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  transition: 0.25s ease;
+}
+
+.treino-card:hover {
+  border-color: #3a3a3a;
+  transform: translateY(-2px);
+}
+
+.treino-number {
+  font-size: 42px;
+  font-weight: 900;
+  color: #e50914;
+  line-height: 1;
+}
+
+.treino-info {
+  flex: 1;
+}
+
+.treino-info span {
+  color: #777;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.treino-info h3 {
+  margin: 6px 0;
+  font-size: 23px;
+}
+
+.treino-info p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.treino-button {
+  background: #e50914;
+  color: #fff;
+  text-decoration: none;
+  padding: 13px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+.treino-button:hover {
+  background: #ff1723;
+  transform: translateY(-1px);
+}
+
+/* ATALHOS */
+
+.aluno-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.shortcut-card {
+  background: #111;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.shortcut-card:hover {
+  border-color: #e50914;
+  transform: translateY(-3px);
+}
+
+.shortcut-card > span {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: #1b1b1b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e50914;
+  font-size: 18px;
+}
+
+.shortcut-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.shortcut-card strong {
+  font-size: 14px;
+}
+
+.shortcut-card small {
+  color: #777;
+  font-size: 11px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 1000px) {
+  .aluno-sidebar {
+    width: 210px;
+  }
+
+  .aluno-content {
+    padding: 35px 30px;
+  }
+
+  .aluno-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aluno-shortcuts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+  .aluno-dashboard {
+    display: block;
+  }
+
+  .aluno-sidebar {
+    width: 100%;
+    min-height: auto;
+    position: static;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid #242424;
+  }
+
+  .aluno-logo {
+    padding: 0 5px 20px;
+  }
+
+  .aluno-menu {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .aluno-menu a {
+    white-space: nowrap;
+  }
+
+  .aluno-logout {
+    margin-top: 15px;
+  }
+
+  .aluno-content {
+    padding: 30px 20px;
+  }
+
+  .aluno-header {
+    align-items: flex-start;
+  }
+
+  .aluno-header h1 {
+    font-size: 30px;
+  }
+
+  .aluno-profile {
+    display: none;
+  }
+
+  .treino-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .treino-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .aluno-content {
+    padding: 25px 15px;
+  }
+
+  .aluno-status-grid {
+    margin-bottom: 40px;
+  }
+
+  .status-card {
+    padding: 18px;
+  }
+
+  .aluno-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .treino-card {
+    padding: 22px;
+  }
+}

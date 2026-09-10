@@ -45,7 +45,7 @@ function VideoCard({ video }: VideoCardProps) {
         />
       ) : (
         <div style={{ padding: "30px" }}>
-          <p>VÌdeo inv·lido.</p>
+          <p>V√≠deo inv√°lido.</p>
         </div>
       )}
 
