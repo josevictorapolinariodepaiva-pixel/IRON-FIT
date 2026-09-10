@@ -1,7 +1,7 @@
 import {
   useEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 
 import "./Home.css";
@@ -66,15 +66,12 @@ function Home() {
           );
 
         smoothTime +=
-          (
-            targetTime -
-            smoothTime
-          ) * 0.12;
+          (targetTime - smoothTime) * 0.12;
 
         if (
           Math.abs(
             videoElement.currentTime -
-            smoothTime
+              smoothTime
           ) > 0.01
         ) {
           videoElement.currentTime =
@@ -94,9 +91,7 @@ function Home() {
       }
 
       animationId =
-        requestAnimationFrame(
-          updateVideo
-        );
+        requestAnimationFrame(updateVideo);
     };
 
     const handleLoadedMetadata = () => {
@@ -115,9 +110,7 @@ function Home() {
       videoElement.currentTime = 0.001;
 
       animationId =
-        requestAnimationFrame(
-          updateVideo
-        );
+        requestAnimationFrame(updateVideo);
     };
 
     const videoElement =
@@ -131,16 +124,14 @@ function Home() {
           "loadedmetadata",
           handleLoadedMetadata,
           {
-            once: true
+            once: true,
           }
         );
       }
     }
 
     return () => {
-      cancelAnimationFrame(
-        animationId
-      );
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
@@ -148,7 +139,7 @@ function Home() {
     document
       .querySelector(".hero")
       ?.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
       });
   };
 
@@ -156,7 +147,7 @@ function Home() {
     document
       .querySelector(".benefits")
       ?.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
       });
   };
 
@@ -170,19 +161,16 @@ function Home() {
 
   return (
     <main>
-
       {/* NAVBAR */}
 
       <nav className="navbar">
-
         <div className="navbar-logo">
           IRON<span>FIT</span>
         </div>
 
         <div className="navbar-links">
-
           <a href="/">
-            InÃ­cio
+            Início
           </a>
 
           <a
@@ -215,21 +203,16 @@ function Home() {
           >
             Entrar
           </a>
-
         </div>
-
       </nav>
 
-
-      {/* VÃDEO */}
+      {/* VÍDEO */}
 
       <section
         className="video-scroll"
         ref={sectionRef}
       >
-
         <div className="video-sticky">
-
           <video
             ref={videoRef}
             className="intro-video"
@@ -241,19 +224,15 @@ function Home() {
 
           <div className="video-dark-overlay"></div>
 
-
           {/* ETAPA 01 */}
 
           <div
-            className={
-              `video-step ${
-                videoStep === 1
-                  ? "active"
-                  : ""
-              }`
-            }
+            className={`video-step ${
+              videoStep === 1
+                ? "active"
+                : ""
+            }`}
           >
-
             <div className="step-number">
               01
             </div>
@@ -271,32 +250,23 @@ function Home() {
             <small>
               DESCUBRA O QUE VEM A SEGUIR
             </small>
-
           </div>
-
 
           {/* ETAPA 02 */}
 
           <div
-            className={
-              `video-loading ${
-                videoStep === 2
-                  ? "active"
-                  : ""
-              }`
-            }
+            className={`video-loading ${
+              videoStep === 2
+                ? "active"
+                : ""
+            }`}
           >
-
             <div className="loading-top">
+              <span>02</span>
 
               <span>
-                02
+                CARREGANDO EXPERIÊNCIA
               </span>
-
-              <span>
-                CARREGANDO EXPERIÃŠNCIA
-              </span>
-
             </div>
 
             <div className="loading-title">
@@ -304,53 +274,43 @@ function Home() {
             </div>
 
             <div className="loading-percentage">
-
               {Math.round(
                 scrollProgress * 100
               )}
               %
-
             </div>
 
             <div className="loading-bar">
-
               <div
                 className="loading-bar-fill"
                 style={{
-                  width:
-                    `${scrollProgress * 100}%`
+                  width: `${scrollProgress * 100}%`,
                 }}
               />
-
             </div>
 
             <span className="loading-text">
-              CONSTRUINDO SUA EXPERIÃŠNCIA...
+              CONSTRUINDO SUA EXPERIÊNCIA...
             </span>
-
           </div>
-
 
           {/* ETAPA 03 */}
 
           <div
-            className={
-              `video-overlay ${
-                showContent
-                  ? "show-content"
-                  : ""
-              }`
-            }
+            className={`video-overlay ${
+              showContent
+                ? "show-content"
+                : ""
+            }`}
           >
-
             <div className="final-step">
               03
               <span></span>
-              EXPERIÃŠNCIA LIBERADA
+              EXPERIÊNCIA LIBERADA
             </div>
 
             <span className="video-label">
-              BEM-VINDO Ã€ PLATAFORMA
+              BEM-VINDO À PLATAFORMA
             </span>
 
             <h1>
@@ -360,13 +320,12 @@ function Home() {
             <p>
               Uma plataforma completa para
               gerenciamento de academia,
-              reunindo treinos, exercÃ­cios,
-              vÃ­deos, dietas e acompanhamento
-              em um Ãºnico sistema.
+              reunindo treinos, exercícios,
+              vídeos, dietas e acompanhamento
+              em um único sistema.
             </p>
 
             <div className="video-buttons">
-
               <button onClick={goToHero}>
                 Conhecer a plataforma
               </button>
@@ -377,18 +336,13 @@ function Home() {
               >
                 Ver recursos
               </button>
-
             </div>
-
           </div>
-
 
           {/* HUD */}
 
           <div className="game-hud">
-
             <div className="game-status">
-
               <span>
                 ETAPA 0{videoStep}
               </span>
@@ -399,28 +353,21 @@ function Home() {
                 )}
                 %
               </strong>
-
             </div>
 
             <div className="game-progress">
-
               <div
                 className="game-progress-fill"
                 style={{
-                  width:
-                    `${scrollProgress * 100}%`
+                  width: `${scrollProgress * 100}%`,
                 }}
               />
-
             </div>
-
           </div>
-
 
           {/* INDICADOR */}
 
           <div className="video-steps-indicator">
-
             <div
               className={
                 videoStep >= 1
@@ -429,7 +376,7 @@ function Home() {
               }
             >
               <span>01</span>
-              <small>INÃCIO</small>
+              <small>INÍCIO</small>
             </div>
 
             <div
@@ -440,7 +387,7 @@ function Home() {
               }
             >
               <span>02</span>
-              <small>PREPARAÃ‡ÃƒO</small>
+              <small>PREPARAÇÃO</small>
             </div>
 
             <div
@@ -453,19 +400,14 @@ function Home() {
               <span>03</span>
               <small>IRONFIT</small>
             </div>
-
           </div>
-
         </div>
-
       </section>
-
 
       {/* HERO */}
 
       <section className="hero">
-
-        {/* ÃšNICO GIF DA SECTION */}
+        {/* ÚNICO GIF DA SECTION */}
 
         <img
           src={gifBackground}
@@ -474,10 +416,9 @@ function Home() {
         />
 
         <div className="hero-content">
-
           <span className="hero-badge">
             <span className="hero-badge-dot"></span>
-            PERFORMANCE â€¢ DISCIPLINA â€¢ EVOLUÃ‡ÃƒO
+            PERFORMANCE • DISCIPLINA • EVOLUÇÃO
           </span>
 
           <h1>
@@ -488,13 +429,12 @@ function Home() {
           <p>
             Uma plataforma completa para
             gerenciamento de academia, reunindo
-            treinos, exercÃ­cios, vÃ­deos, dietas,
-            progresso e gestÃ£o de alunos em
-            um Ãºnico sistema.
+            treinos, exercícios, vídeos, dietas,
+            progresso e gestão de alunos em
+            um único sistema.
           </p>
 
           <div className="hero-actions">
-
             <button
               className="primary-button"
               onClick={goToBenefits}
@@ -508,53 +448,47 @@ function Home() {
             >
               Criar cadastro
             </button>
-
           </div>
 
           <div className="hero-stats">
-
             <div>
               <strong>06</strong>
+
               <span>
-                MÃ³dulos do sistema
+                Módulos do sistema
               </span>
             </div>
 
             <div>
               <strong>02</strong>
+
               <span>
-                Tipos de usuÃ¡rio
+                Tipos de usuário
               </span>
             </div>
 
             <div>
               <strong>100%</strong>
+
               <span>
                 Projeto responsivo
               </span>
             </div>
-
           </div>
-
         </div>
 
-
         <div className="hero-gym-card">
-
           <div className="gym-card-top">
-
             <span>
               IRONFIT
             </span>
 
             <span className="gym-status">
-              â— SISTEMA ONLINE
+              ● SISTEMA ONLINE
             </span>
-
           </div>
 
           <div className="gym-card-content">
-
             <span className="gym-card-label">
               PLATAFORMA
             </span>
@@ -565,31 +499,25 @@ function Home() {
             </h2>
 
             <p>
-              Uma experiÃªncia digital para
-              organizar treinos, exercÃ­cios,
-              vÃ­deos, dietas e evoluÃ§Ã£o.
+              Uma experiência digital para
+              organizar treinos, exercícios,
+              vídeos, dietas e evolução.
             </p>
-
           </div>
 
           <div className="gym-card-bottom">
-
             <div>
-              <span>ÃREA</span>
+              <span>ÁREA</span>
               <strong>ALUNO</strong>
             </div>
 
             <div>
-              <span>ÃREA</span>
+              <span>ÁREA</span>
               <strong>ADMIN</strong>
             </div>
-
           </div>
-
         </div>
-
       </section>
-
 
       {/* RECURSOS */}
 
@@ -597,8 +525,7 @@ function Home() {
         className="benefits"
         id="recursos"
       >
-
-        {/* ÃšNICO GIF DA SECTION */}
+        {/* ÚNICO GIF DA SECTION */}
 
         <img
           src={gifBackground}
@@ -607,7 +534,6 @@ function Home() {
         />
 
         <div className="benefits-header">
-
           <span className="section-badge">
             RECURSOS DA PLATAFORMA
           </span>
@@ -618,70 +544,59 @@ function Home() {
 
           <p>
             Um sistema pensado para organizar
-            diferentes Ã¡reas de uma academia
-            em uma Ãºnica experiÃªncia.
+            diferentes áreas de uma academia
+            em uma única experiência.
           </p>
-
         </div>
 
-
         <div className="benefits-grid">
-
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               01
             </span>
 
             <div className="benefit-icon">
-              âš¡
+              ⚡
             </div>
 
             <h3>
-              GestÃ£o de treinos
+              Gestão de treinos
             </h3>
 
             <p>
-              OrganizaÃ§Ã£o de treinos e exercÃ­cios
+              Organização de treinos e exercícios
               para facilitar o acompanhamento
               da rotina dos alunos.
             </p>
-
           </article>
 
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               02
             </span>
 
             <div className="benefit-icon">
-              â—ˆ
+              ◈
             </div>
 
             <h3>
-              Biblioteca de vÃ­deos
+              Biblioteca de vídeos
             </h3>
 
             <p>
-              Ãrea dedicada a vÃ­deos de treinamento,
-              permitindo organizar conteÃºdos por
-              categoria e nÃ­vel.
+              Área dedicada a vídeos de treinamento,
+              permitindo organizar conteúdos por
+              categoria e nível.
             </p>
-
           </article>
 
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               03
             </span>
 
             <div className="benefit-icon">
-              â†‘
+              ↑
             </div>
 
             <h3>
@@ -689,68 +604,59 @@ function Home() {
             </h3>
 
             <p>
-              VisualizaÃ§Ã£o de progresso, informaÃ§Ãµes
+              Visualização de progresso, informações
               do aluno e acompanhamento de sua
-              evoluÃ§Ã£o ao longo do tempo.
+              evolução ao longo do tempo.
             </p>
-
           </article>
 
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               04
             </span>
 
             <div className="benefit-icon">
-              â—‰
+              ◉
             </div>
 
             <h3>
-              Ãrea do aluno
+              Área do aluno
             </h3>
 
             <p>
-              Um espaÃ§o prÃ³prio para acessar
-              treinos, exercÃ­cios, dieta, vÃ­deos,
+              Um espaço próprio para acessar
+              treinos, exercícios, dieta, vídeos,
               progresso e perfil.
             </p>
-
           </article>
 
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               05
             </span>
 
             <div className="benefit-icon">
-              â—†
+              ◆
             </div>
 
             <h3>
-              Ãrea administrativa
+              Área administrativa
             </h3>
 
             <p>
               Painel destinado ao gerenciamento
-              de alunos, treinos, exercÃ­cios,
-              vÃ­deos e dietas.
+              de alunos, treinos, exercícios,
+              vídeos e dietas.
             </p>
-
           </article>
 
-
           <article className="benefit-card">
-
             <span className="benefit-number">
               06
             </span>
 
             <div className="benefit-icon">
-              ðŸ”
+              🔐
             </div>
 
             <h3>
@@ -758,24 +664,18 @@ function Home() {
             </h3>
 
             <p>
-              SeparaÃ§Ã£o das Ã¡reas do sistema
-              de acordo com o tipo de usuÃ¡rio,
+              Separação das áreas do sistema
+              de acordo com o tipo de usuário,
               aluno ou administrador.
             </p>
-
           </article>
-
-
         </div>
-
       </section>
-
 
       {/* CTA FINAL */}
 
       <section className="final-cta">
-
-        {/* ÃšNICO GIF DA SECTION */}
+        {/* ÚNICO GIF DA SECTION */}
 
         <img
           src={gifBackground}
@@ -784,25 +684,23 @@ function Home() {
         />
 
         <div className="final-cta-content">
-
           <span className="final-cta-label">
             PLATAFORMA IRONFIT
           </span>
 
           <h2>
             TREINO.
-            <strong>EVOLUÃ‡ÃƒO.</strong>
+            <strong>EVOLUÇÃO.</strong>
           </h2>
 
           <p>
-            Uma experiÃªncia digital criada para
-            conectar alunos, treinos, exercÃ­cios,
-            vÃ­deos e acompanhamento em um
-            Ãºnico lugar.
+            Uma experiência digital criada para
+            conectar alunos, treinos, exercícios,
+            vídeos e acompanhamento em um
+            único lugar.
           </p>
 
           <div className="hero-actions">
-
             <button
               className="primary-button"
               onClick={goToCadastro}
@@ -816,13 +714,9 @@ function Home() {
             >
               Entrar no sistema
             </button>
-
           </div>
-
         </div>
-
       </section>
-
     </main>
   );
 }
