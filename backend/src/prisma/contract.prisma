@@ -1,0 +1,9 @@
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  tipo      String   @default("aluno")
+  createdAt TimestamptzString @default(now())
+  updatedAt temporal.updatedAtString()
+}

@@ -1,42 +1,21 @@
 import express = require("express");
+import alunoRoutes = require("./routes/aluno.routes");
 
 const app = express();
+
 app.use(express.json());
+
+// Rotas
+app.use("/alunos", alunoRoutes);
 
 const PORT = 3000;
 
 app.get("/", (req, res) => {
   res.json({
-    mensagem: "API do JobConnect funcionando!"
-  });
-});
-
-app.get("/vagas", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      titulo: "Desenvolvedor Front-end",
-      empresa: "Empresa X",
-      localizacao: "Barbacena - MG"
-    },
-    {
-      id: 2,
-      titulo: "Desenvolvedor Back-end",
-      empresa: "Empresa Y",
-      localizacao: "Juiz de Fora - MG"
-    }
-  ]);
-});
-
-app.post("/vagas", (req, res) => {
-  const novaVaga = req.body;
-
-  res.json({
-    mensagem: "Vaga cadastrada com sucesso!",
-    vaga: novaVaga
+    mensagem: "API do IRONFIT funcionando!"
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor IRONFIT rodando na porta ${PORT}`);
 });
