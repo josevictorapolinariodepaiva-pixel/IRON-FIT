@@ -22,7 +22,7 @@ function ProtectedRoute({
   if (usuario.tipo !== tipo) {
     return (
       <Navigate
-        to={usuario.tipo === "admin" ? "/admin" : "/aluno"}
+        to={usuario.tipo === "administrador" ? "/admin" : "/"}
         replace
       />
     );

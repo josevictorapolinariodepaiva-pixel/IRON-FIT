@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 interface NavbarProps {
-  tipo: "aluno" | "admin";
+  tipo: "aluno" | "administrador";
 }
 
 function Navbar({ tipo }: NavbarProps) {
@@ -26,7 +26,7 @@ function Navbar({ tipo }: NavbarProps) {
       <div className="navbar-container">
 
         <Link
-          to={tipo === "admin" ? "/admin" : "/aluno"}
+          to={tipo === "administrador" ? "/admin" : "/aluno"}
           className="navbar-brand"
         >
           ??? Academia

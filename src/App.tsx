@@ -126,7 +126,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <DashboardAdmin />
               </ProtectedRoute>
             }
@@ -135,7 +135,7 @@ function App() {
           <Route
             path="/admin/alunos"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <AlunosAdmin />
               </ProtectedRoute>
             }
@@ -144,7 +144,7 @@ function App() {
           <Route
             path="/admin/videos"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <VideosAdmin />
               </ProtectedRoute>
             }
@@ -153,7 +153,7 @@ function App() {
           <Route
             path="/admin/treinos"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <TreinosAdmin />
               </ProtectedRoute>
             }
@@ -162,7 +162,7 @@ function App() {
           <Route
             path="/admin/exercicios"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <ExerciciosAdmin />
               </ProtectedRoute>
             }
@@ -171,7 +171,7 @@ function App() {
           <Route
             path="/admin/dietas"
             element={
-              <ProtectedRoute tipo="admin">
+              <ProtectedRoute tipo="administrador">
                 <DietasAdmin />
               </ProtectedRoute>
             }

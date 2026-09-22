@@ -5,19 +5,24 @@ import {
   cadastrarAluno,
   consultarAluno,
   atualizarAluno,
-  deletarAluno
+  deletarAluno,
+  entrarAluno
 } from "../controllers/aluno.controller";
+import { autenticar, autorizar } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 
-router.get("/", listarAlunos);
-
 router.post("/", cadastrarAluno);
 
-router.get("/:id", consultarAluno);
+// LOGIN — deve ficar antes de /:id
+router.post("/login", entrarAluno);
 
-router.put("/:id", atualizarAluno);
+router.get("/", autenticar, autorizar("administrador"), listarAlunos);
 
-router.delete("/:id", deletarAluno);
+router.get("/:id", autenticar, consultarAluno);
+
+router.put("/:id", autenticar, atualizarAluno);
+
+router.delete("/:id", autenticar, autorizar("administrador"), deletarAluno);
 
 export = router;

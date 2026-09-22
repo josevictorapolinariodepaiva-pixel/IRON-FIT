@@ -5,11 +5,13 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 
-import type { TipoUsuario, UsuarioLogado } from "../types/Auth";
+import type { UsuarioLogado } from "../types/Auth";
+import type { RespostaLogin } from "../services/api";
 
 interface AuthContextData {
   usuario: UsuarioLogado | null;
-  login: (email: string, senha: string, tipo: TipoUsuario) => void;
+  token: string | null;
+  login: (resposta: RespostaLogin) => void;
   logout: () => void;
 }
 
@@ -21,26 +23,20 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [usuario, setUsuario] = useState<UsuarioLogado | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
-  const login = (email: string, senha: string, tipo: TipoUsuario) => {
-    if (!email || !senha) return;
-
-    const novoUsuario: UsuarioLogado = {
-      id: 1,
-      nome: tipo === "admin" ? "Administrador" : "Aluno",
-      email,
-      tipo
-    };
-
-    setUsuario(novoUsuario);
+  const login = (resposta: RespostaLogin) => {
+    setUsuario(resposta.usuario);
+    setToken(resposta.token);
   };
 
   const logout = () => {
     setUsuario(null);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout }}>
+    <AuthContext.Provider value={{ usuario, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
