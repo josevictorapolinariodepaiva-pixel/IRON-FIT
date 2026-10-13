@@ -1,3 +1,4 @@
+
 import type { TipoUsuario, UsuarioLogado } from "../types/Auth";
 
 const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
@@ -9,10 +10,7 @@ interface RespostaErroApi {
 export class ErroApi extends Error {
   public readonly status: number;
 
-  constructor(
-    status: number,
-    mensagem: string
-  ) {
+  constructor(status: number, mensagem: string) {
     super(mensagem);
     this.status = status;
   }
@@ -80,15 +78,19 @@ export async function requisicaoApi<T>(
       headers: cabecalhos
     });
   } catch {
-    throw new ErroApi(0, "Não foi possível conectar ao servidor. Tente novamente.");
+    throw new ErroApi(
+      0,
+      "Não foi possível conectar ao servidor. Tente novamente."
+    );
   }
 
   const dados = await lerResposta(response);
 
   if (!response.ok) {
-    const mensagem = typeof dados === "object" && dados !== null
-      ? (dados as RespostaErroApi).mensagem
-      : undefined;
+    const mensagem =
+      typeof dados === "object" && dados !== null
+        ? (dados as RespostaErroApi).mensagem
+        : undefined;
 
     throw new ErroApi(
       response.status,
@@ -100,11 +102,15 @@ export async function requisicaoApi<T>(
 }
 
 export async function cadastrarAluno(
-  dados: DadosCadastro
+  dados: DadosCadastro,
+  turnstileToken: string
 ): Promise<UsuarioLogado> {
   const usuario = await requisicaoApi<UsuarioApi>("/alunos", {
     method: "POST",
-    body: JSON.stringify(dados)
+    body: JSON.stringify({
+      ...dados,
+      turnstileToken
+    })
   });
 
   return normalizarUsuario(usuario);
@@ -112,15 +118,20 @@ export async function cadastrarAluno(
 
 export async function entrarAluno(
   email: string,
-  senha: string
+  senha: string,
+  turnstileToken: string
 ): Promise<RespostaLogin> {
-  const resposta = await requisicaoApi<{ token: string; usuario: UsuarioApi }>(
-    "/alunos/login",
-    {
-      method: "POST",
-      body: JSON.stringify({ email, senha })
-    }
-  );
+  const resposta = await requisicaoApi<{
+    token: string;
+    usuario: UsuarioApi;
+  }>("/alunos/login", {
+    method: "POST",
+    body: JSON.stringify({
+      email,
+      senha,
+      turnstileToken
+    })
+  });
 
   return {
     token: resposta.token,
