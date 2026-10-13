@@ -1,8 +1,12 @@
+
 import {
   useEffect,
   useRef,
   useState,
 } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 import "./Home.css";
 
@@ -10,12 +14,18 @@ import video from "../../assets/videos/academia.mp4";
 import gifBackground from "../../assets/gifs/ironfit.gif";
 
 function Home() {
+  const { usuario, logout } = useAuth();
+  const navigate = useNavigate();
+
   const [showContent, setShowContent] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [videoStep, setVideoStep] = useState(1);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const isAdmin = usuario?.tipo === "administrador";
+  const isAluno = usuario?.tipo === "aluno";
 
   useEffect(() => {
     let animationId = 0;
@@ -35,47 +45,31 @@ function Home() {
         const rect = section.getBoundingClientRect();
 
         const sectionHeight =
-          section.offsetHeight -
-          window.innerHeight;
+          section.offsetHeight - window.innerHeight;
 
         const progress =
           sectionHeight > 0
             ? Math.min(
-                Math.max(
-                  -rect.top / sectionHeight,
-                  0
-                ),
+                Math.max(-rect.top / sectionHeight, 0),
                 1
               )
             : 0;
 
-        if (
-          Math.abs(
-            progress - lastProgress
-          ) > 0.001
-        ) {
+        if (Math.abs(progress - lastProgress) > 0.001) {
           lastProgress = progress;
           setScrollProgress(progress);
         }
 
         targetTime =
           progress *
-          Math.max(
-            videoElement.duration - 0.001,
-            0
-          );
+          Math.max(videoElement.duration - 0.001, 0);
 
-        smoothTime +=
-          (targetTime - smoothTime) * 0.12;
+        smoothTime += (targetTime - smoothTime) * 0.12;
 
         if (
-          Math.abs(
-            videoElement.currentTime -
-              smoothTime
-          ) > 0.01
+          Math.abs(videoElement.currentTime - smoothTime) > 0.01
         ) {
-          videoElement.currentTime =
-            smoothTime;
+          videoElement.currentTime = smoothTime;
         }
 
         if (progress < 0.30) {
@@ -90,31 +84,24 @@ function Home() {
         }
       }
 
-      animationId =
-        requestAnimationFrame(updateVideo);
+      animationId = requestAnimationFrame(updateVideo);
     };
 
     const handleLoadedMetadata = () => {
-      const videoElement =
-        videoRef.current;
+      const videoElement = videoRef.current;
 
-      if (!videoElement) {
-        return;
-      }
+      if (!videoElement) return;
 
       videoElement.pause();
 
       smoothTime = 0;
       targetTime = 0;
-
       videoElement.currentTime = 0.001;
 
-      animationId =
-        requestAnimationFrame(updateVideo);
+      animationId = requestAnimationFrame(updateVideo);
     };
 
-    const videoElement =
-      videoRef.current;
+    const videoElement = videoRef.current;
 
     if (videoElement) {
       if (videoElement.readyState >= 1) {
@@ -123,40 +110,54 @@ function Home() {
         videoElement.addEventListener(
           "loadedmetadata",
           handleLoadedMetadata,
-          {
-            once: true,
-          }
+          { once: true }
         );
       }
     }
 
     return () => {
       cancelAnimationFrame(animationId);
+
+      if (videoElement) {
+        videoElement.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata
+        );
+      }
     };
   }, []);
 
   const goToHero = () => {
-    document
-      .querySelector(".hero")
-      ?.scrollIntoView({
-        behavior: "smooth",
-      });
+    document.querySelector(".hero")?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const goToBenefits = () => {
-    document
-      .querySelector(".benefits")
-      ?.scrollIntoView({
-        behavior: "smooth",
-      });
+    document.querySelector(".benefits")?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const goToCadastro = () => {
-    window.location.href = "/cadastro";
+    navigate("/cadastro");
   };
 
   const goToLogin = () => {
-    window.location.href = "/login";
+    navigate("/login");
+  };
+
+  const goToPainel = () => {
+    if (isAdmin) {
+      navigate("/admin");
+    } else if (isAluno) {
+      navigate("/aluno");
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
   };
 
   return (
@@ -164,12 +165,22 @@ function Home() {
       {/* NAVBAR */}
 
       <nav className="navbar">
-        <div className="navbar-logo">
+        <Link
+          to="/"
+          className="navbar-logo"
+          aria-label="IRONFIT - Início"
+        >
           IRON<span>FIT</span>
-        </div>
+        </Link>
 
         <div className="navbar-links">
-          <a href="/">
+          <a
+            href="/"
+            onClick={(event) => {
+              event.preventDefault();
+              goToHero();
+            }}
+          >
             Início
           </a>
 
@@ -183,35 +194,43 @@ function Home() {
             Recursos
           </a>
 
-          <a
-            href="/cadastro"
-            onClick={(event) => {
-              event.preventDefault();
-              goToCadastro();
-            }}
-          >
-            Cadastro
-          </a>
+          {!usuario && (
+            <>
+              <Link to="/cadastro">Cadastro</Link>
 
-          <a
-            href="/login"
-            className="navbar-login"
-            onClick={(event) => {
-              event.preventDefault();
-              goToLogin();
-            }}
-          >
-            Entrar
-          </a>
+              <Link to="/login" className="navbar-login">
+                Entrar
+              </Link>
+            </>
+          )}
+
+          {usuario && (
+            <button
+              type="button"
+              className="navbar-login"
+              onClick={goToPainel}
+            >
+              {isAdmin
+                ? "Painel Administrativo"
+                : "Painel do Aluno"}
+            </button>
+          )}
+
+          {usuario && (
+            <button
+              type="button"
+              className="navbar-logout"
+              onClick={handleLogout}
+            >
+              ↪ Sair da conta
+            </button>
+          )}
         </div>
       </nav>
 
       {/* VÍDEO */}
 
-      <section
-        className="video-scroll"
-        ref={sectionRef}
-      >
+      <section className="video-scroll" ref={sectionRef}>
         <div className="video-sticky">
           <video
             ref={videoRef}
@@ -228,56 +247,36 @@ function Home() {
 
           <div
             className={`video-step ${
-              videoStep === 1
-                ? "active"
-                : ""
+              videoStep === 1 ? "active" : ""
             }`}
           >
-            <div className="step-number">
-              01
-            </div>
-
+            <div className="step-number">01</div>
             <div className="step-line"></div>
-
-            <span>
-              ROLE PARA BAIXO
-            </span>
+            <span>ROLE PARA BAIXO</span>
 
             <div className="scroll-mouse">
               <div className="scroll-wheel"></div>
             </div>
 
-            <small>
-              DESCUBRA O QUE VEM A SEGUIR
-            </small>
+            <small>DESCUBRA O QUE VEM A SEGUIR</small>
           </div>
 
           {/* ETAPA 02 */}
 
           <div
             className={`video-loading ${
-              videoStep === 2
-                ? "active"
-                : ""
+              videoStep === 2 ? "active" : ""
             }`}
           >
             <div className="loading-top">
               <span>02</span>
-
-              <span>
-                CARREGANDO EXPERIÊNCIA
-              </span>
+              <span>CARREGANDO EXPERIÊNCIA</span>
             </div>
 
-            <div className="loading-title">
-              PREPARE-SE
-            </div>
+            <div className="loading-title">PREPARE-SE</div>
 
             <div className="loading-percentage">
-              {Math.round(
-                scrollProgress * 100
-              )}
-              %
+              {Math.round(scrollProgress * 100)}%
             </div>
 
             <div className="loading-bar">
@@ -298,9 +297,7 @@ function Home() {
 
           <div
             className={`video-overlay ${
-              showContent
-                ? "show-content"
-                : ""
+              showContent ? "show-content" : ""
             }`}
           >
             <div className="final-step">
@@ -343,15 +340,10 @@ function Home() {
 
           <div className="game-hud">
             <div className="game-status">
-              <span>
-                ETAPA 0{videoStep}
-              </span>
+              <span>ETAPA 0{videoStep}</span>
 
               <strong>
-                {Math.round(
-                  scrollProgress * 100
-                )}
-                %
+                {Math.round(scrollProgress * 100)}%
               </strong>
             </div>
 
@@ -368,35 +360,17 @@ function Home() {
           {/* INDICADOR */}
 
           <div className="video-steps-indicator">
-            <div
-              className={
-                videoStep >= 1
-                  ? "current"
-                  : ""
-              }
-            >
+            <div className={videoStep >= 1 ? "current" : ""}>
               <span>01</span>
               <small>INÍCIO</small>
             </div>
 
-            <div
-              className={
-                videoStep >= 2
-                  ? "current"
-                  : ""
-              }
-            >
+            <div className={videoStep >= 2 ? "current" : ""}>
               <span>02</span>
               <small>PREPARAÇÃO</small>
             </div>
 
-            <div
-              className={
-                videoStep >= 3
-                  ? "current"
-                  : ""
-              }
-            >
+            <div className={videoStep >= 3 ? "current" : ""}>
               <span>03</span>
               <small>IRONFIT</small>
             </div>
@@ -407,8 +381,6 @@ function Home() {
       {/* HERO */}
 
       <section className="hero">
-        {/* ÚNICO GIF DA SECTION */}
-
         <img
           src={gifBackground}
           className="section-fire"
@@ -442,47 +414,48 @@ function Home() {
               Conhecer recursos
             </button>
 
-            <button
-              className="outline-button"
-              onClick={goToCadastro}
-            >
-              Criar cadastro
-            </button>
+            {!usuario && (
+              <button
+                className="outline-button"
+                onClick={goToCadastro}
+              >
+                Criar cadastro
+              </button>
+            )}
+
+            {usuario && (
+              <button
+                className="outline-button"
+                onClick={goToPainel}
+              >
+                {isAdmin
+                  ? "Acessar painel administrativo"
+                  : "Acessar painel do aluno"}
+              </button>
+            )}
           </div>
 
           <div className="hero-stats">
             <div>
               <strong>06</strong>
-
-              <span>
-                Módulos do sistema
-              </span>
+              <span>Módulos do sistema</span>
             </div>
 
             <div>
               <strong>02</strong>
-
-              <span>
-                Tipos de usuário
-              </span>
+              <span>Tipos de usuário</span>
             </div>
 
             <div>
               <strong>100%</strong>
-
-              <span>
-                Projeto responsivo
-              </span>
+              <span>Projeto responsivo</span>
             </div>
           </div>
         </div>
 
         <div className="hero-gym-card">
           <div className="gym-card-top">
-            <span>
-              IRONFIT
-            </span>
-
+            <span>IRONFIT</span>
             <span className="gym-status">
               ● SISTEMA ONLINE
             </span>
@@ -521,12 +494,7 @@ function Home() {
 
       {/* RECURSOS */}
 
-      <section
-        className="benefits"
-        id="recursos"
-      >
-        {/* ÚNICO GIF DA SECTION */}
-
+      <section className="benefits" id="recursos">
         <img
           src={gifBackground}
           className="section-fire"
@@ -538,9 +506,7 @@ function Home() {
             RECURSOS DA PLATAFORMA
           </span>
 
-          <h2>
-            Mais do que uma interface.
-          </h2>
+          <h2>Mais do que uma interface.</h2>
 
           <p>
             Um sistema pensado para organizar
@@ -551,18 +517,9 @@ function Home() {
 
         <div className="benefits-grid">
           <article className="benefit-card">
-            <span className="benefit-number">
-              01
-            </span>
-
-            <div className="benefit-icon">
-              ⚡
-            </div>
-
-            <h3>
-              Gestão de treinos
-            </h3>
-
+            <span className="benefit-number">01</span>
+            <div className="benefit-icon">⚡</div>
+            <h3>Gestão de treinos</h3>
             <p>
               Organização de treinos e exercícios
               para facilitar o acompanhamento
@@ -571,18 +528,9 @@ function Home() {
           </article>
 
           <article className="benefit-card">
-            <span className="benefit-number">
-              02
-            </span>
-
-            <div className="benefit-icon">
-              ◈
-            </div>
-
-            <h3>
-              Biblioteca de vídeos
-            </h3>
-
+            <span className="benefit-number">02</span>
+            <div className="benefit-icon">◈</div>
+            <h3>Biblioteca de vídeos</h3>
             <p>
               Área dedicada a vídeos de treinamento,
               permitindo organizar conteúdos por
@@ -591,18 +539,9 @@ function Home() {
           </article>
 
           <article className="benefit-card">
-            <span className="benefit-number">
-              03
-            </span>
-
-            <div className="benefit-icon">
-              ↑
-            </div>
-
-            <h3>
-              Acompanhamento
-            </h3>
-
+            <span className="benefit-number">03</span>
+            <div className="benefit-icon">↑</div>
+            <h3>Acompanhamento</h3>
             <p>
               Visualização de progresso, informações
               do aluno e acompanhamento de sua
@@ -611,18 +550,9 @@ function Home() {
           </article>
 
           <article className="benefit-card">
-            <span className="benefit-number">
-              04
-            </span>
-
-            <div className="benefit-icon">
-              ◉
-            </div>
-
-            <h3>
-              Área do aluno
-            </h3>
-
+            <span className="benefit-number">04</span>
+            <div className="benefit-icon">◉</div>
+            <h3>Área do aluno</h3>
             <p>
               Um espaço próprio para acessar
               treinos, exercícios, dieta, vídeos,
@@ -631,18 +561,9 @@ function Home() {
           </article>
 
           <article className="benefit-card">
-            <span className="benefit-number">
-              05
-            </span>
-
-            <div className="benefit-icon">
-              ◆
-            </div>
-
-            <h3>
-              Área administrativa
-            </h3>
-
+            <span className="benefit-number">05</span>
+            <div className="benefit-icon">◆</div>
+            <h3>Área administrativa</h3>
             <p>
               Painel destinado ao gerenciamento
               de alunos, treinos, exercícios,
@@ -651,18 +572,9 @@ function Home() {
           </article>
 
           <article className="benefit-card">
-            <span className="benefit-number">
-              06
-            </span>
-
-            <div className="benefit-icon">
-              🔐
-            </div>
-
-            <h3>
-              Controle de acesso
-            </h3>
-
+            <span className="benefit-number">06</span>
+            <div className="benefit-icon">🔐</div>
+            <h3>Controle de acesso</h3>
             <p>
               Separação das áreas do sistema
               de acordo com o tipo de usuário,
@@ -675,8 +587,6 @@ function Home() {
       {/* CTA FINAL */}
 
       <section className="final-cta">
-        {/* ÚNICO GIF DA SECTION */}
-
         <img
           src={gifBackground}
           className="section-fire"
@@ -701,19 +611,34 @@ function Home() {
           </p>
 
           <div className="hero-actions">
-            <button
-              className="primary-button"
-              onClick={goToCadastro}
-            >
-              Criar cadastro
-            </button>
+            {!usuario && (
+              <>
+                <button
+                  className="primary-button"
+                  onClick={goToCadastro}
+                >
+                  Criar cadastro
+                </button>
 
-            <button
-              className="outline-button"
-              onClick={goToLogin}
-            >
-              Entrar no sistema
-            </button>
+                <button
+                  className="outline-button"
+                  onClick={goToLogin}
+                >
+                  Entrar no sistema
+                </button>
+              </>
+            )}
+
+            {usuario && (
+              <button
+                className="primary-button"
+                onClick={goToPainel}
+              >
+                {isAdmin
+                  ? "Painel Administrativo"
+                  : "Painel do Aluno"}
+              </button>
+            )}
           </div>
         </div>
       </section>

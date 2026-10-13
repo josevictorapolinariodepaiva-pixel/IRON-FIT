@@ -20,7 +20,7 @@ function DashboardAluno() {
             <span>Início</span>
           </Link>
 
-          <Link to="/aluno/treinos">
+          <Link to="/aluno/treino">
             <span className="menu-icon">⚡</span>
             <span>Meus treinos</span>
           </Link>

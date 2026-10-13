@@ -1,125 +1,419 @@
-﻿.dietas-admin-page {
+﻿.iron-admin {
+  --iron-purple: #8b5cf6;
+  --iron-purple-bright: #a78bfa;
+  --iron-purple-dark: #6d28d9;
+  --iron-bg: #090a0f;
+  --iron-sidebar: #0b0c13;
+  --iron-card: #101119;
+  --iron-card-soft: #13141e;
+  --iron-border: #252632;
+  --iron-text: #f3f2fa;
+  --iron-muted: #89899e;
+
+  display: flex;
   min-height: 100vh;
-  padding: 42px 5%;
-  background:
-    radial-gradient(circle at 85% 0%, rgba(255, 45, 45, 0.08), transparent 28%),
-    #090909;
-  color: #f5f5f5;
+  color: var(--iron-text);
+  background: var(--iron-bg);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.dietas-admin-header {
-  max-width: 1400px;
-  margin: 0 auto 32px;
+.iron-admin,
+.iron-admin * {
+  box-sizing: border-box;
+}
+
+.iron-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex: 0 0 238px;
+  flex-direction: column;
+  width: 238px;
+  height: 100vh;
+  padding: 27px 15px 18px;
+  border-right: 1px solid var(--iron-border);
+  background: var(--iron-sidebar);
+}
+
+.iron-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 12px 43px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.iron-logo-mark {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #a78bfa, #6d28d9);
+  box-shadow: 0 6px 20px #8b5cf633;
+  font-size: 20px;
+}
+
+.iron-sidebar-label {
+  margin: 0 12px 13px;
+  color: #66677c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.iron-nav {
+  display: grid;
+  gap: 6px;
+}
+
+.iron-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 43px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #9292a6;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.iron-nav a:hover {
+  background: #151522;
+  color: #f4f0ff;
+}
+
+.iron-nav a.active {
+  border-color: #8b5cf633;
+  background: linear-gradient(90deg, #8b5cf626, #8b5cf60a);
+  color: #c4b5fd;
+}
+
+.iron-nav-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  font-size: 17px;
+}
+
+.iron-sidebar-bottom {
+  display: grid;
+  gap: 18px;
+  margin-top: auto;
+}
+
+.iron-sidebar-promo {
+  position: relative;
+  padding: 17px 14px;
+  border: 1px solid #8b5cf62b;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #8b5cf614, #15121f);
+}
+
+.iron-promo-icon {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: #8b5cf626;
+  color: #c4b5fd;
+}
+
+.iron-sidebar-promo strong {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.iron-sidebar-promo p {
+  margin: 7px 0 0;
+  color: #85849a;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.iron-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  color: #85859a;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.iron-workspace {
+  flex: 1;
+  min-width: 0;
+}
+
+.iron-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 69px;
+  padding: 0 34px;
+  border-bottom: 1px solid var(--iron-border);
+  background: #0b0c12;
+}
+
+.iron-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #77788d;
+  font-size: 12px;
+}
+
+.iron-breadcrumb span:last-child {
+  color: #e7e5f2;
+}
+
+.iron-breadcrumb-separator {
+  color: #55566a;
+}
+
+.iron-top-profile {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.iron-online-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10px #4ade8055;
+}
+
+.iron-admin-avatar {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #8b5cf644;
+  border-radius: 11px;
+  background: #8b5cf61c;
+  color: #c4b5fd;
+  font-weight: 800;
+}
+
+.iron-admin-info {
+  display: grid;
+  gap: 3px;
+}
+
+.iron-admin-info strong {
+  color: #e8e7f1;
+  font-size: 12px;
+}
+
+.iron-admin-info span {
+  color: #77788d;
+  font-size: 10px;
+}
+
+.iron-profile-chevron {
+  margin-left: 5px;
+  color: #77788d;
+}
+
+.iron-page-content {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 35px 34px 22px;
+}
+
+.iron-page-heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
+  margin-bottom: 25px;
 }
 
-.dietas-admin-eyebrow,
-.dieta-section-heading span {
-  display: block;
-  color: #ff3b30;
-  font-size: 0.72rem;
+.iron-overline {
+  color: #a78bfa;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 1.8px;
 }
 
-.dietas-admin-header h1 {
-  margin: 8px 0;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+.iron-page-heading h1 {
+  margin: 10px 0 7px;
+  color: #f7f5ff;
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
 }
 
-.dietas-admin-header p {
+.iron-page-heading p {
   margin: 0;
-  color: #999;
+  color: var(--iron-muted);
+  font-size: 12px;
+  line-height: 1.7;
 }
 
-.dietas-back-link {
-  color: #ddd;
-  text-decoration: none;
-  border: 1px solid #292929;
-  padding: 12px 16px;
-  border-radius: 10px;
-  transition: 0.2s;
-}
-
-.dietas-back-link:hover {
-  border-color: #ff3b30;
-  color: #fff;
-}
-
-.dietas-admin-stats {
-  max-width: 1400px;
-  margin: 0 auto 28px;
+.iron-metrics {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
-.dieta-stat {
-  padding: 22px;
-  border: 1px solid #252525;
-  border-radius: 14px;
-  background: #111;
+.iron-metric-card {
+  position: relative;
+  display: flex;
+  min-height: 145px;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 18px 19px 17px;
+  border: 1px solid var(--iron-border);
+  border-radius: 13px;
+  background: linear-gradient(145deg, #12131c, #0e0f16);
 }
 
-.dieta-stat span {
-  color: #8f8f8f;
-  font-size: 0.82rem;
+.iron-metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.dieta-stat strong {
-  display: block;
+.iron-metric-label {
+  color: #a1a1b5;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.iron-metric-icon {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  font-size: 17px;
+}
+
+.iron-metric-icon.purple {
+  background: #8b5cf61c;
+  color: #b8a0ff;
+}
+
+.iron-metric-icon.green {
+  background: #22c55e18;
+  color: #4ade80;
+}
+
+.iron-metric-icon.red {
+  background: #ef444418;
+  color: #fb7185;
+}
+
+.iron-metric-number {
+  margin-top: 13px;
+  color: #f8f7ff;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.iron-metric-caption {
   margin-top: 8px;
-  font-size: 2rem;
+  color: #77788d;
+  font-size: 10px;
 }
+
+.iron-metric-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  opacity: 0.9;
+}
+
+.purple-line {
+  background: linear-gradient(90deg, #8b5cf6, transparent);
+}
+
+.green-line {
+  background: linear-gradient(90deg, #22c55e, transparent);
+}
+
+.red-line {
+  background: linear-gradient(90deg, #f43f5e, transparent);
+}
+
+/* Layout específico da página de dietas */
 
 .dietas-admin-grid {
-  max-width: 1400px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.5fr);
   align-items: start;
+  gap: 20px;
 }
 
 .dieta-form-card,
 .dieta-list-section {
-  border: 1px solid #252525;
-  border-radius: 16px;
-  background: #101010;
+  min-width: 0;
+  border: 1px solid var(--iron-border);
+  border-radius: 14px;
+  background: var(--iron-card);
 }
 
 .dieta-form-card {
-  padding: 24px;
-  position: sticky;
-  top: 20px;
+  padding: 23px;
+}
+
+.dieta-section-heading > span {
+  color: #a78bfa;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
 }
 
 .dieta-section-heading h2 {
-  margin: 7px 0 22px;
-  font-size: 1.35rem;
+  margin: 8px 0 6px;
+  color: #f3f2fa;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.dieta-section-heading p {
+  margin: 0 0 20px;
+  color: var(--iron-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.dieta-form-card form {
+  display: grid;
+  gap: 16px;
 }
 
 .dieta-form-field {
-  margin-bottom: 16px;
-}
-
-.dieta-form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  min-width: 0;
+  gap: 8px;
 }
 
 .dieta-form-field label {
-  display: block;
-  margin-bottom: 7px;
-  color: #cfcfcf;
-  font-size: 0.82rem;
-  font-weight: 600;
+  color: #c8c7d7;
+  font-size: 11px;
+  font-weight: 650;
 }
 
 .dieta-form-field input,
@@ -128,19 +422,36 @@
 .dieta-filters input,
 .dieta-filters select {
   width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #2b2b2b;
+  min-width: 0;
+  border: 1px solid #2b2c3b;
   border-radius: 9px;
-  background: #181818;
-  color: #fff;
-  padding: 12px;
   outline: none;
+  background: #0c0d14;
+  color: #eae8f5;
   font: inherit;
+  font-size: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dieta-form-field input,
+.dieta-form-field select,
+.dieta-filters input,
+.dieta-filters select {
+  height: 42px;
+  padding: 0 12px;
 }
 
 .dieta-form-field textarea {
+  min-height: 95px;
+  padding: 12px;
   resize: vertical;
-  min-height: 100px;
+  line-height: 1.6;
+}
+
+.dieta-form-field input::placeholder,
+.dieta-form-field textarea::placeholder,
+.dieta-filters input::placeholder {
+  color: #5f6074;
 }
 
 .dieta-form-field input:focus,
@@ -148,196 +459,430 @@
 .dieta-form-field textarea:focus,
 .dieta-filters input:focus,
 .dieta-filters select:focus {
-  border-color: #ff3b30;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px #8b5cf61b;
+}
+
+.dieta-form-field select option,
+.dieta-filters select option {
+  background: #101119;
+  color: #f3f2fa;
+}
+
+.dieta-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .dieta-submit-button {
-  width: 100%;
-  border: 0;
+  min-height: 43px;
+  margin-top: 3px;
+  border: 1px solid #a78bfa55;
   border-radius: 9px;
-  padding: 13px;
-  background: #ff3b30;
+  background: linear-gradient(110deg, #8b5cf6, #6d28d9);
   color: #fff;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 750;
   cursor: pointer;
-  transition: 0.2s;
+  transition: filter 0.2s, transform 0.2s;
 }
 
 .dieta-submit-button:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.12);
   transform: translateY(-1px);
 }
 
 .dieta-list-section {
-  padding: 24px;
+  padding: 23px;
 }
 
 .dieta-list-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.dieta-list-header .dieta-section-heading h2 {
+  margin-bottom: 0;
 }
 
 .dieta-count {
-  color: #888;
-  font-size: 0.82rem;
-  padding-top: 4px;
+  flex-shrink: 0;
+  padding: 7px 9px;
+  border: 1px solid #8b5cf62e;
+  border-radius: 8px;
+  background: #8b5cf611;
+  color: #b8a0ff;
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .dieta-filters {
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) 210px 160px;
-  gap: 10px;
-  margin-bottom: 18px;
+  grid-template-columns: minmax(120px, 1fr) minmax(120px, 0.9fr) minmax(105px, 0.7fr);
+  gap: 9px;
+  margin-bottom: 17px;
+}
+
+.dieta-filters input,
+.dieta-filters select {
+  height: 39px;
+  font-size: 11px;
 }
 
 .dieta-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 10px;
 }
 
 .dieta-admin-card {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px;
-  border: 1px solid #242424;
-  border-radius: 12px;
-  background: #151515;
+  align-items: flex-start;
+  gap: 13px;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #272836;
+  border-radius: 11px;
+  background: linear-gradient(120deg, #141520, #101119);
+  transition: border-color 0.2s;
+}
+
+.dieta-admin-card:hover {
+  border-color: #8b5cf64d;
 }
 
 .dieta-icon {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
   display: grid;
+  flex: 0 0 37px;
   place-items: center;
+  width: 37px;
+  height: 37px;
+  border: 1px solid #8b5cf633;
   border-radius: 10px;
-  background: #261313;
-  color: #ff3b30;
-  font-size: 1.1rem;
-  font-weight: 900;
+  background: #8b5cf61b;
+  color: #c4b5fd;
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .dieta-info {
-  min-width: 0;
   flex: 1;
+  min-width: 0;
 }
 
 .dieta-title-row {
   display: flex;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 8px;
 }
 
 .dieta-title-row h3 {
-  margin: 0;
-  font-size: 1rem;
+  margin: 1px 0;
+  color: #f1effa;
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .dieta-level {
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #222;
-  color: #aaa;
-  font-size: 0.68rem;
+  padding: 4px 7px;
+  border: 1px solid #8b5cf62e;
+  border-radius: 6px;
+  background: #8b5cf611;
+  color: #b7a0ff;
+  font-size: 9px;
   font-weight: 700;
 }
 
 .dieta-meta {
   display: flex;
-  gap: 7px;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 5px;
-  color: #ff3b30;
-  font-size: 0.76rem;
-  font-weight: 700;
+  gap: 7px;
+  margin-top: 9px;
+  color: #9292a7;
+  font-size: 10px;
 }
 
 .dieta-info p {
-  margin: 7px 0 0;
-  color: #888;
-  font-size: 0.82rem;
-  line-height: 1.45;
+  margin: 9px 0 0;
+  color: #77788d;
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .dieta-delete-button {
-  flex: 0 0 auto;
-  border: 1px solid #3a2020;
-  border-radius: 8px;
-  background: transparent;
-  color: #ff6259;
-  padding: 9px 11px;
+  flex-shrink: 0;
+  min-height: 31px;
+  padding: 0 10px;
+  border: 1px solid #f8717138;
+  border-radius: 7px;
+  background: #ef444410;
+  color: #fb8585;
+  font-size: 10px;
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .dieta-delete-button:hover {
-  background: #2a1111;
-  border-color: #ff3b30;
+  border-color: #f8717180;
+  background: #ef444421;
 }
 
 .dietas-empty {
-  padding: 50px 20px;
-  border: 1px dashed #303030;
-  border-radius: 12px;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 40px 15px;
+  border: 1px dashed #303142;
+  border-radius: 10px;
   text-align: center;
 }
 
-.dietas-empty strong,
-.dietas-empty span {
-  display: block;
+.dietas-empty strong {
+  color: #d9d7e7;
+  font-size: 12px;
 }
 
 .dietas-empty span {
-  margin-top: 7px;
-  color: #777;
-  font-size: 0.85rem;
+  color: #85859a;
+  font-size: 11px;
 }
 
-@media (max-width: 1050px) {
+.iron-page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid var(--iron-border);
+  color: #626378;
+  font-size: 10px;
+}
+
+@media (max-width: 1250px) {
+  .iron-page-content {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .iron-topbar {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .dietas-admin-grid {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.3fr);
+  }
+
+  .iron-metrics {
+    gap: 11px;
+  }
+
+  .iron-metric-card {
+    padding: 16px;
+  }
+
+  .dieta-list-section,
+  .dieta-form-card {
+    padding: 18px;
+  }
+
+  .dieta-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dieta-filters input {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 950px) {
+  .iron-sidebar {
+    flex-basis: 205px;
+    width: 205px;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .iron-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .dietas-admin-grid {
     grid-template-columns: 1fr;
   }
-
-  .dieta-form-card {
-    position: static;
-  }
 }
 
-@media (max-width: 850px) {
-  .dietas-admin-stats {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 620px) {
+  .iron-admin {
+    display: block;
+  }
+
+  .iron-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 15px;
+    border-right: 0;
+    border-bottom: 1px solid var(--iron-border);
+  }
+
+  .iron-logo {
+    margin: 0 4px 16px;
+  }
+
+  .iron-sidebar-label,
+  .iron-sidebar-bottom {
+    display: none;
+  }
+
+  .iron-nav {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .iron-nav a {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .iron-nav-icon {
+    width: auto;
+  }
+
+  .iron-topbar {
+    min-height: 62px;
+    padding: 0 16px;
+  }
+
+  .iron-top-profile {
+    gap: 7px;
+  }
+
+  .iron-admin-info span,
+  .iron-profile-chevron,
+  .iron-online-dot {
+    display: none;
+  }
+
+  .iron-admin-avatar {
+    width: 31px;
+    height: 31px;
+  }
+
+  .iron-page-content {
+    padding: 23px 14px 17px;
+  }
+
+  .iron-page-heading {
+    margin-bottom: 20px;
+  }
+
+  .iron-page-heading p {
+    max-width: 360px;
+  }
+
+  .iron-metrics {
+    gap: 9px;
+    margin-bottom: 17px;
+  }
+
+  .iron-metric-card {
+    min-height: 126px;
+    padding: 13px;
+  }
+
+  .iron-metric-label {
+    font-size: 10px;
+  }
+
+  .iron-metric-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .iron-metric-number {
+    font-size: 25px;
+  }
+
+  .iron-metric-caption {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .dietas-admin-grid {
+    gap: 14px;
+  }
+
+  .dieta-form-card,
+  .dieta-list-section {
+    padding: 15px;
+  }
+
+  .dieta-form-row {
+    gap: 9px;
+  }
+
+  .dieta-list-header {
+    align-items: flex-start;
   }
 
   .dieta-filters {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 600px) {
-  .dietas-admin-page {
-    padding: 28px 16px;
-  }
-
-  .dietas-admin-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .dieta-form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
+  .dieta-filters input {
+    grid-column: auto;
   }
 
   .dieta-admin-card {
-    align-items: flex-start;
-    flex-wrap: wrap;
+    gap: 9px;
+    padding: 11px;
+  }
+
+  .dieta-icon {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .dieta-title-row h3 {
+    font-size: 12px;
+  }
+
+  .dieta-meta {
+    gap: 5px;
+    font-size: 9px;
+  }
+
+  .dieta-info p {
+    font-size: 10px;
   }
 
   .dieta-delete-button {
-    margin-left: 62px;
+    padding: 0 7px;
+    font-size: 9px;
+  }
+
+  .iron-page-footer {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iron-admin * {
+    scroll-behavior: auto !important;
+    transition: none !important;
   }
 }
