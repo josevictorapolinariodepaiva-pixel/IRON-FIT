@@ -4,7 +4,8 @@ import { z } from "zod";
 export const criarAlunoSchema = z.object({
   nome: z.string().min(3, "O nome deve ter pelo menos 3 caracteres"),
   email: z.string().email("E-mail inválido"),
-  senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
+  senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+  turnstileToken: z.string().min(1, "Conclua a verificação de segurança")
 });
 
 // SCHEMA DE ATUALIZAÇÃO
@@ -14,7 +15,8 @@ export const atualizarAlunoSchema = z.object({
 });
 
 // SCHEMA DE LOGIN
-export const loginSchema = criarAlunoSchema.pick({
-  email: true,
-  senha: true
+export const loginSchema = z.object({
+  email: z.string().email("E-mail inválido"),
+  senha: z.string().min(1, "Informe sua senha"),
+  turnstileToken: z.string().min(1, "Conclua a verificação de segurança")
 });

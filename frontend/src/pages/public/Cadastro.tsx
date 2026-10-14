@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,7 +19,7 @@ function Cadastro() {
   const [enviando, setEnviando] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState("");
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setMensagemErro("");
 
@@ -29,8 +28,13 @@ function Cadastro() {
       return;
     }
 
-    if (!email.trim()) {
-      setMensagemErro("Informe seu e-mail.");
+    const emailNormalizado = email.trim();
+
+    if (
+      !emailNormalizado ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNormalizado)
+    ) {
+      setMensagemErro("Informe um e-mail válido.");
       return;
     }
 
@@ -55,7 +59,7 @@ function Cadastro() {
       await cadastrarAluno(
         {
           nome: nome.trim(),
-          email: email.trim(),
+          email: emailNormalizado,
           senha
         },
         turnstileToken
@@ -74,7 +78,7 @@ function Cadastro() {
           : "Não foi possível concluir o cadastro. Tente novamente."
       );
 
-      // O token pode ter sido consumido na tentativa anterior.
+      // O token pode ser de uso único; gere outro antes de tentar novamente.
       setTurnstileToken("");
     } finally {
       setEnviando(false);
@@ -156,7 +160,7 @@ function Cadastro() {
             {turnstileSiteKey ? (
               <Turnstile
                 siteKey={turnstileSiteKey}
-               options={{
+                options={{
                   language: "pt-br",
                   theme: "dark"
                 }}
@@ -164,7 +168,9 @@ function Cadastro() {
                   setTurnstileToken(token);
                   setMensagemErro("");
                 }}
-                onExpire={() => setTurnstileToken("")}
+                onExpire={() => {
+                  setTurnstileToken("");
+                }}
                 onError={() => {
                   setTurnstileToken("");
                   setMensagemErro(
@@ -188,7 +194,11 @@ function Cadastro() {
           <button
             type="submit"
             className="cadastro-button"
-            disabled={enviando || !turnstileToken || !turnstileSiteKey}
+            disabled={
+              enviando ||
+              !turnstileToken ||
+              !turnstileSiteKey
+            }
           >
             {enviando ? "Criando conta..." : "Criar minha conta"}
           </button>
